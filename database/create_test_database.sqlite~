@@ -1,0 +1,6 @@
+create table test_user(id integer primary key, value name, value password);
+insert into test_user(id, name, password) values(1, 'user1', 'abcde');
+insert into test_user(id, name, password) values(2, 'user2', 'abcde');
+insert into test_user(id, name, password) values(3, 'user3', 'abcde');
+insert into test_user(id, name, password) values(4, 'user4', 'abcde');
+insert into test_user(id, name, password) values(5, 'user5', 'abcde');
