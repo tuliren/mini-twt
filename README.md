@@ -9,3 +9,6 @@ package: com.grp4.loginsystem
 
 ## Reference
 http://jmuras.com/blog/2010/spring-hibernate-maven-struts2-integration-tutorial/
+=======
+Fall2013-Group4
+===============
