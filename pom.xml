@@ -9,6 +9,7 @@
     <artifactId>LoginSystem</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
+    
     <name>LoginSystem</name>
   
 	<url>http://maven.apache.org</url>
