@@ -6,5 +6,6 @@
 	<!-- Database Configuration -->
 	<import resource="classes/resources/spring/config/DataSource.xml" />
 	<import resource="classes/resources/spring/config/Hibernate.xml" />
- 
+    <!-- Beans Declaration -->
+    <import resource="classes/resources/spring/UserBean.xml" />
 </beans>
