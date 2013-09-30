@@ -1,4 +1,4 @@
-Mini twitter server for CS506 course project
+Fall2013-Group4 Mini twitter server for CS506 course project
 ============================================
 
 ## Basic information
@@ -9,6 +9,3 @@ package: com.grp4.loginsystem
 
 ## Reference
 http://jmuras.com/blog/2010/spring-hibernate-maven-struts2-integration-tutorial/
-=======
-Fall2013-Group4
-===============
