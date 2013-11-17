@@ -13,16 +13,7 @@
 <div id="main">
 
 <?php
-if (!empty($_SESSION['loggedin']) && !empty($_SESSION['username'])) {
-    ?>
-    <h1>Mini-Twitter Four</h1>
-    <p><a href="profile.php">Profile</a>&nbsp;<a href="logout.php">Logout</a></p>
-    <br />
-    <p>Welcome, <b><?=$_SESSION['first_name']?></b>.</p>    
-    <br />
-
-    <?php
-} elseif (!empty($_POST['username']) && !empty($_POST['password'])) {
+if (!empty($_POST['username']) && !empty($_POST['password'])) {
     $username = mysql_real_escape_string($_POST['username']);
     // for encryption, use the following statement:
     // $password = md5(mysql_real_escape_string($_POST['password']));
@@ -48,7 +39,7 @@ if (!empty($_SESSION['loggedin']) && !empty($_SESSION['username'])) {
         echo "<h1>Mini-Twitter Four</h1>";
         echo "<br />";
         echo "<p>You have successfully logged in, and will be redirected to the member area.</p>";
-        echo "<meta http-equiv='refresh' content='2;index.php' />";
+        echo "<meta http-equiv='refresh' content='2;main.php' />";
     } else {
         echo "<h1>Mini-Twitter Four</h1>";
         echo "<br />";

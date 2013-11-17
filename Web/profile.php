@@ -14,25 +14,6 @@
 
 <?php
 
-// update the information
-$username = $_SESSION['username'];
-$password = $_SESSION['password'];
-$checklogin = mysql_query("SELECT * FROM users WHERE Username = '".$username."' AND Password = '".$password."'");
-$row = mysql_fetch_array($checklogin);  
-$email = $row['email'];
-$password = $row['password'];
-$first_name = $row['first_name'];
-$last_name = $row['last_name'];
-$user_id = $row['user_id'];
-
-$_SESSION['username'] = $username;
-$_SESSION['email'] = $email;
-$_SESSION['loggedin'] = 1;
-$_SESSION['first_name'] = $first_name;
-$_SESSION['last_name'] = $last_name;
-$_SESSION['user_id'] = $user_id;
-$_SESSION['password'] = $password;
-
 if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST['last_name']) || !empty($_POST['email'])) {
     // to use encryption, use the following statement
     // $password = md5(mysql_real_escape_string($_POST['password']));
@@ -77,13 +58,30 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
             echo "<p>Modification failed.";
         }
         echo "&nbsp;<a href=\"profile.php\">Go back</a>.</p>";
+        
+        // retrieve the new information
+        $checklogin = mysql_query("SELECT * FROM users WHERE Username = '".$username."' AND Password = '".$password."'");
+        $row = mysql_fetch_array($checklogin);
+        $email = $row['email'];
+        $password = $row['password'];
+        $first_name = $row['first_name'];
+        $last_name = $row['last_name'];
+        $user_id = $row['user_id'];
+
+        $_SESSION['username'] = $username;
+        $_SESSION['email'] = $email;
+        $_SESSION['loggedin'] = 1;
+        $_SESSION['first_name'] = $first_name;
+        $_SESSION['last_name'] = $last_name;
+        $_SESSION['user_id'] = $user_id;
+        $_SESSION['password'] = $password;
     }
     
     
 } else if (!empty($_SESSION['loggedin']) && !empty($_SESSION['username'])) {
     ?>
     <h1>Mini-Twitter Four</h1>    
-    <p><a href="index.php">Main page</a>&nbsp;<a href="logout.php">Logout</a></p>    
+    <p><a href="main.php">Main page</a>&nbsp;<a href="logout.php">Logout</a></p>    
     <br />
     <p>Personal profile for <b><?=$_SESSION['username']?></b></p>
     <br />
