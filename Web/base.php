@@ -1,4 +1,8 @@
-<?php  
+<?php
+    // References
+    // login / registration: http://net.tutsplus.com/tutorials/php/user-membership-with-php/
+    // tweet deletion:       http://webdesignpeeps.com/delete-records-from-mysql-database-using-php/
+    
     session_start();
   
     $dbhost = "localhost";           // this will ususally be 'localhost', but can sometimes differ  
