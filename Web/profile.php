@@ -89,12 +89,21 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
     <br />
     <form method="post" action="profile.php" name="modifyform" id="modifyform">  
     <fieldset>        
-        <label for="first_name" width=100>First name</label><label><?=$_SESSION['first_name']?></label><input type="text" name="first_name" id="first_name" /><br />
-        <label for="last_name">Last name</label><label><?=$_SESSION['last_name']?></label><input type="text" name="last_name" id="last_name" /><br />
-        <label for="email">Email</label><label><?=$_SESSION['email']?></label><input type="text" name="email" id="email" /><br />
-        <label for="password">Password</label><label>******</label><input type="password" name="password" id="password" /><br />
+        <label for="first_name">First name</label><label><?=$_SESSION['first_name']?></label>
+        <input type="text" name="first_name" id="first_name" maxlength=<?=$maxlength_first_name?> placeholder="new first name"/><br />
+        
+        <label for="last_name">Last name</label><label><?=$_SESSION['last_name']?></label>
+        <input type="text" name="last_name" id="last_name" maxlength=<?=$maxlength_last_name?> placeholder="new last name"/><br />
+        
+        <label for="email">Email</label><label><?=$_SESSION['email']?></label>
+        <input type="email" name="email" id="email" maxlength=<?=$maxlength_email?> placeholder="new email"/><br />
+        
+        <label for="password">Password</label><label>******</label>
+        <input type="password" name="password" id="password" maxlength=<?=$maxlength_password?> placeholder="new password"/><br />
+        
         <br />
-        <input type="submit" name="modify" id="modify" value="Modify" />  
+        <input type="submit" name="modify" id="modify" value="Modify" />
+        
     </fieldset>
     </form>
 
