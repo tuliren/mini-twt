@@ -13,7 +13,11 @@
 <div id="main">
 
 <?php
-if (!empty($_POST['username']) && !empty($_POST['password'])) {
+if (!empty($_POST['username']) &&
+    !empty($_POST['password']) &&
+    !empty($_POST['first_name'])&&
+    !empty($_POST['last_name']) &&
+    !empty($_POST['email'])) {
     $username = mysql_real_escape_string($_POST['username']);
     // to use encryption, use the following statement
     // $password = md5(mysql_real_escape_string($_POST['password']));

@@ -13,27 +13,26 @@
 <div id="main">
 
 <?php
-if(!empty($_SESSION['loggedin']) && !empty($_SESSION['username'])) {
+if (!empty($_SESSION['loggedin']) && !empty($_SESSION['username'])) {
     ?>
     <h1>Mini-Twitter Four</h1>
+    <p><a href="profile.php">Profile</a>&nbsp;<a href="logout.php">Logout</a></p>
     <br />
-    <p>Welcome, <b><?=$_SESSION['first_name']?></b>.
-       &nbsp;<a href="profile.php">Profile</a>
-       &nbsp;<a href="logout.php">Logout</a>
-    </p>
+    <p>Welcome, <b><?=$_SESSION['first_name']?></b>.</p>    
     <br />
 
     <?php
-} elseif(!empty($_POST['username']) && !empty($_POST['password'])) {
+} elseif (!empty($_POST['username']) && !empty($_POST['password'])) {
     $username = mysql_real_escape_string($_POST['username']);
     // for encryption, use the following statement:
     // $password = md5(mysql_real_escape_string($_POST['password']));
     $password = mysql_real_escape_string($_POST['password']);
     $checklogin = mysql_query("SELECT * FROM users WHERE Username = '".$username."' AND Password = '".$password."'");
 
-    if(mysql_num_rows($checklogin) == 1) {
+    if (mysql_num_rows($checklogin) == 1) {
         $row = mysql_fetch_array($checklogin);  
         $email = $row['email'];
+        $password = $row['password'];
         $first_name = $row['first_name'];
         $last_name = $row['last_name'];
         $user_id = $row['user_id'];
@@ -44,6 +43,7 @@ if(!empty($_SESSION['loggedin']) && !empty($_SESSION['username'])) {
         $_SESSION['first_name'] = $first_name;
         $_SESSION['last_name'] = $last_name;
         $_SESSION['user_id'] = $user_id;
+        $_SESSION['password'] = $password;
         
         echo "<h1>Mini-Twitter Four</h1>";
         echo "<br />";

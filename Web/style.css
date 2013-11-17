@@ -1,7 +1,7 @@
 * {  
     margin: 0;  
     padding: 0;  
-}  
+}
 body {  
     font-family: Trebuchet MS;  
 }  
@@ -21,17 +21,18 @@ a:hover, a:active, a:visited {
 }  
 form fieldset { border: 0; }  
 form fieldset p br { clear: left; }  
-label {  
-    margin-top: 5px;  
-    display: block;  
-    width: 100px;  
+label {
+    display: block;
+    margin-top: 0px;  
+    display: block;
+    width: 170px;
     padding: 0;  
-    float: left;  
+    float: left;
 }  
 input {  
     font-family: Trebuchet MS;  
     border: 1px solid #CCC;  
-    margin-bottom: 5px;  
+    margin-bottom: 7px;  
     background-color: #FFF;  
     padding: 2px;  
 }  
