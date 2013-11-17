@@ -13,6 +13,8 @@
     $maxlength_email = 50;    
     $maxlength_tweet = 140;
     
+    $tweet_limit = 5;
+    
     mysql_connect($dbhost, $dbuser, $dbpass) or die("MySQL Error: " . mysql_error());  
     mysql_select_db($dbname) or die("MySQL Error: " . mysql_error());  
 ?>

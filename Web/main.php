@@ -17,12 +17,13 @@
 $user_id = (int) $_SESSION['user_id'];
 
 if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {    
-    
+    // post new tweets
     $tweet_text = mysql_real_escape_string($_POST['new_tweet']);
     var_dump($user_id);
     var_dump($tweet_text);
     $newtweet = mysql_query("INSERT INTO tweets (Users_user_id, tweet_text) VALUES(".$user_id.", '".$tweet_text."')");  
         if ($newtweet) {
+            $_SESSION['user_tweet_offset'] = 0;
             echo "<meta http-equiv='refresh' content='0;main.php' />";
         } else {
             echo "<h1>Mini-Twitter Four</h1>";
@@ -31,6 +32,31 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
         }
         
 } else if (!empty($_SESSION['loggedin']) && empty($_POST['tweet'])) {
+    // display prev or next tweets
+    if (!empty($_POST['showtweets'])) {
+        switch ($_POST['showtweets']) {
+            case 'Prev':
+                if ($_SESSION['user_tweet_offset'] - $tweet_limit >= 0) {
+                    $_SESSION['user_tweet_offset'] = $_SESSION['user_tweet_offset'] - $tweet_limit;
+                } else {
+                    $_SESSION['user_tweet_offset'] = 0;
+                }
+            break;
+            case 'Next':
+                $new_offset = $_SESSION['user_tweet_offset'] + $tweet_limit;
+                $tweetcount = mysql_query("SELECT tweet_date, tweet_text FROM tweets
+                                       WHERE Users_user_id=".$user_id."
+                                       ORDER BY tweet_date DESC
+                                       LIMIT ".$tweet_limit."
+                                       OFFSET ".$new_offset."");
+                if (mysql_num_rows($tweetcount) > 0) {
+                    $_SESSION['user_tweet_offset'] = $new_offset;
+                }
+            break;
+            default:
+            break;
+        }
+    }
     ?>
     
     <h1>Mini-Twitter Four</h1>
@@ -49,9 +75,18 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
     </fieldset>
     </form>
     <br /><br />
+    <form method="post" action="main.php" name="showtweets">
+    <input type="submit" name="showtweets" value="Prev">
+    <input type="submit" name="showtweets" value="Next">
+    </form>
     
     <?php
-    $tweets = mysql_query("SELECT tweet_date, tweet_text FROM tweets WHERE Users_user_id=".$user_id."");
+    // display tweets
+    $tweets = mysql_query("SELECT tweet_date, tweet_text FROM tweets
+                           WHERE Users_user_id=".$user_id."
+                           ORDER BY tweet_date DESC
+                           LIMIT ".$tweet_limit."
+                           OFFSET ".$_SESSION['user_tweet_offset']."");
     while( $row = mysql_fetch_array($tweets) ){
     ?>
     
@@ -62,7 +97,7 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
         <textarea name="tweet" id="new_tweet" disabled rows=2 cols=100
                   align=left style="resize: none;"><?=$row['tweet_text']?>
         </textarea>
-        <br /><br /><br />        
+        <br /><br /><br />
     </fieldset>
     </form>
     <?php
