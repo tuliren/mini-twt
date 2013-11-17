@@ -67,7 +67,8 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
         $first_name = $row['first_name'];
         $last_name = $row['last_name'];
         $user_id = $row['user_id'];
-
+        $created_date = date("M Y", strtotime($row['created_date']));
+        
         $_SESSION['username'] = $username;
         $_SESSION['email'] = $email;
         $_SESSION['loggedin'] = 1;
@@ -75,6 +76,7 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
         $_SESSION['last_name'] = $last_name;
         $_SESSION['user_id'] = $user_id;
         $_SESSION['password'] = $password;
+        $_SESSION['created_date'] = $created_date;        
     }
     
     
@@ -83,14 +85,14 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
     <h1>Mini-Twitter Four</h1>    
     <p><a href="main.php">Main page</a>&nbsp;<a href="logout.php">Logout</a></p>    
     <br />
-    <p>Personal profile for <b><?=$_SESSION['username']?></b></p>
+    <p>Personal profile for <b><?=$_SESSION['username']?></b> (joined since <?=$_SESSION['created_date']?>)</p>
     <br />
     <form method="post" action="profile.php" name="modifyform" id="modifyform">  
     <fieldset>        
-        <label for="first_name" width=100>First name: </label><label><?=$_SESSION['first_name']?></label><input type="text" name="first_name" id="first_name" /><br />
-        <label for="last_name">Last name:</label><label><?=$_SESSION['last_name']?></label><input type="text" name="last_name" id="last_name" /><br />
-        <label for="email">Email:</label><label><?=$_SESSION['email']?></label><input type="text" name="email" id="email" /><br />
-        <label for="password">Password:</label><label>******</label><input type="password" name="password" id="password" /><br />
+        <label for="first_name" width=100>First name</label><label><?=$_SESSION['first_name']?></label><input type="text" name="first_name" id="first_name" /><br />
+        <label for="last_name">Last name</label><label><?=$_SESSION['last_name']?></label><input type="text" name="last_name" id="last_name" /><br />
+        <label for="email">Email</label><label><?=$_SESSION['email']?></label><input type="text" name="email" id="email" /><br />
+        <label for="password">Password</label><label>******</label><input type="password" name="password" id="password" /><br />
         <br />
         <input type="submit" name="modify" id="modify" value="Modify" />  
     </fieldset>

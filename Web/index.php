@@ -27,6 +27,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
         $first_name = $row['first_name'];
         $last_name = $row['last_name'];
         $user_id = $row['user_id'];
+        $created_date = date("M Y", strtotime($row['created_date']));
         
         $_SESSION['username'] = $username;
         $_SESSION['email'] = $email;
@@ -35,6 +36,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
         $_SESSION['last_name'] = $last_name;
         $_SESSION['user_id'] = $user_id;
         $_SESSION['password'] = $password;
+        $_SESSION['created_date'] = $created_date;
         
         echo "<h1>Mini-Twitter Four</h1>";
         echo "<br />";
