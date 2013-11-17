@@ -1,0 +1,42 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+
+-- -----------------------------------------------------
+-- Table `Twitter_Group_Four`.`Users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Twitter_Group_Four`.`Users` (
+  `user_id` INT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(50) NOT NULL,
+  `password` VARCHAR(50) NOT NULL,  
+  `first_name` VARCHAR(50) NOT NULL,
+  `last_name` VARCHAR(50) NOT NULL,
+  `email` VARCHAR(50) NOT NULL,
+  `gender` VARCHAR(10) NOT NULL,
+  `created_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Twitter_Group_Four`.`Tweets`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Twitter_Group_Four`.`Tweets` (
+  `tweet_id` INT NOT NULL AUTO_INCREMENT,
+  `tweet_text` VARCHAR(140) NOT NULL,
+  `tweet_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `Users_user_id` INT NOT NULL,
+  PRIMARY KEY (`tweet_id`),
+  INDEX `fk_Tweets_Users_idx` (`Users_user_id` ASC),
+  CONSTRAINT `fk_Tweets_Users`
+    FOREIGN KEY (`Users_user_id`)
+    REFERENCES `Twitter_Group_Four`.`Users` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

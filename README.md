@@ -1,34 +1,23 @@
-Fall2013-Group4 Mini twitter server for CS506 course project
+Mini Twitter Four
 ============================================
-
-## Basic information
-
-groupId: com.grp4.loginsystem
-
-artifactId: LoginSystem
-
-version: 1.0-SNAPSHOT
-
-package: com.grp4.loginsystem
+CSCI 50600 course project, group #4
 
 ## Dependencies
-Java, Maven, Spring, Hibernate, Struts2, MySQL
+
+LAMP / WAMP
 
 ## Database settings
 
-MySQL should be hosting database `loginsystem` at `locolhost:3306`.
-The schema for the database can be found in the `sql` file at `\LoginSystem\databse`.
+- [Schema](https://github.iu.edu/CS506/Fall2013-Group4/blob/master/DatabaseSchema/DatabaseSchemaFinal.txt)
+- host: localhost
+- username: root
+- password: root
 
-## Instructions
-- modify database access settings
-- `cd` into `LoginSystem`;
-- generate war file by:
-  `cd LoginSystem
-   mvn clean
-   mvn compile
-   mvn war:war`
-- deploy the war file by Tomcat;
-- use url `localhost:8080/<war-file-name>/listAllUsers.action` for access.
+## Web
 
-## Reference
-http://jmuras.com/blog/2010/spring-hibernate-maven-struts2-integration-tutorial/
+- Put all files under `./Web` into the `www` folder of LAMP / WAMP.
+
+- Launch the web browser and go to `localhost/index.php` to start.
+
+
+## Mobile
