@@ -65,14 +65,13 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
     <h1>Mini-Twitter Four</h1>
     <p><a href="profile.php">Profile</a>&nbsp;<a href="logout.php">Logout</a></p>
     <br />
-    <p>Welcome, <b><?=$_SESSION['first_name']?></b>.</p>    
+    <p>Welcome, <b><?php echo $_SESSION['first_name']; ?></b>.</p>    
     
     <br />
     <form method="post" action="main.php" name="tweetform" id="tweetform">
         <fieldset>
             <label for="new_tweet_label">Write a new tweet</label><br />
-            <textarea name="new_tweet" id="new_tweet" maxlength=<?=$maxlength_tweet?> style="resize: none;"
-                      rows=5 cols=100 placeholder="max 140 characters" required></textarea>
+            <textarea name="new_tweet" id="new_tweet" maxlength=<?php echo $maxlength_tweet; ?> style="resize: none;" rows=5 cols=100 placeholder="max 140 characters" required></textarea>
             <br />
             <input type="submit" name="tweet" id="tweet" value="Tweet" />
         </fieldset>
@@ -96,16 +95,14 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
         ?>
         <form method="post" action="main.php" name="tweet" id="tweet">
         <fieldset>
-            <label><?=$row['tweet_date']?></label>&nbsp;<a href="delete.php?tweet_id=<?=$tweet_id?>">Delete</a>
+            <label><?=$row['tweet_date']?></label>&nbsp;<a href="delete.php?tweet_id=<?php echo $tweet_id; ?>">Delete</a>
             <!--
             <form method="post" action="main.php" name="deletetweet">
                 <input type="submit" name="deletetweet" id="deletetweet" value="Delete" />
             </form>
             -->
             <br />
-            <textarea name="tweet" id="tweet" disabled rows=2 cols=100
-                      align=left style="resize: none;"><?=$row['tweet_text']?>
-            </textarea>
+            <textarea name="tweet" id="tweet" disabled rows=2 cols=100 align=left style="resize: none;"><?php echo $row['tweet_text']; ?></textarea>
             <br /><br /><br />
         </fieldset>
         </form>

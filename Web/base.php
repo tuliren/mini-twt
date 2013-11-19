@@ -1,7 +1,15 @@
 <?php
-    // References
-    // login / registration: http://net.tutsplus.com/tutorials/php/user-membership-with-php/
-    // tweet deletion:       http://webdesignpeeps.com/delete-records-from-mysql-database-using-php/
+    /* References
+     * login / registration: http://net.tutsplus.com/tutorials/php/user-membership-with-php/
+     * tweet deletion:       http://webdesignpeeps.com/delete-records-from-mysql-database-using-php/
+     *
+     *
+     * To use PHP variable in HTML, there are two ways:
+     * <?php echo $variable; ?>
+     * <?=$variable?>
+     * To use the second shorter version, "short_open_tag" should be set to "on"
+     *
+     */
     
     session_start();
   

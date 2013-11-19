@@ -60,11 +60,9 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
     <form method="post" action="index.php" name="loginform" id="loginform">
     <fieldset>
         <label for="username">Username</label>
-        <input type="text" name="username" id="username" maxlength=<?=$maxlength_username?>
-               placeholder="enter username", required/><br />
+        <input type="text" name="username" id="username" maxlength=<?php echo $maxlength_username; ?> placeholder="enter username", required/><br />
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" maxlength=<?=$maxlength_password?>
-               placeholder="enter password" required/><br />        
+        <input type="password" name="password" id="password" maxlength=<?php echo $maxlength_password; ?> placeholder="enter password" required/><br />        
         <br />
         <input type="submit" name="login" id="login" value="Login" />  
     </fieldset>
