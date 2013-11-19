@@ -39,9 +39,4 @@ input {
 input:hover {  
     border: 1px solid #222;  
     background-color: #EEE;  
-}
-texearea {
-    resize: none;
-    max-width: 100px;
-    float: left;
-}
+}  

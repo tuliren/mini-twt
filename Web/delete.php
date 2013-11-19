@@ -2,13 +2,13 @@
     include('base.php');
     
     $id = (int) $_GET['tweet_id'];
-    $tweetdelete = mysql_query("DELETE FROM tweets WHERE tweet_id= ".$id."");
+    $tweetdelete = mysql_query("DELETE FROM Tweets WHERE tweet_id= ".$id."");
      
     // if the above query execute without a glitch, then we’ll redirect the user to the / // previous page
     if ($tweetdelete) {
         $user_id = $_SESSION['user_id'];
         // these code can be simplified by using a $_SESSION['tweet_count'] to track the number of tweets
-        $tweetcount = mysql_query("SELECT tweet_date, tweet_text FROM tweets
+        $tweetcount = mysql_query("SELECT tweet_date, tweet_text FROM Tweets
                                    WHERE Users_user_id=".$user_id."
                                    ORDER BY tweet_date DESC
                                    LIMIT ".$tweet_limit."

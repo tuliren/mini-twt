@@ -5,15 +5,16 @@
     
     session_start();
   
-    $dbhost = "localhost";           // this will ususally be 'localhost', but can sometimes differ  
-    $dbname = "twitter_group_four";  // the name of the database that you are going to use for this project  
+    $dbhost = "localhost";           // this will usually be 'localhost', but can sometimes differ  
+    $dbname = "Twitter_Group_Four";  // the name of the database that you are going to use for this project  
     $dbuser = "root";                // the username that you created, or were given, to access your database  
-    $dbpass = "root";                // the password that you created, or were given, to access your database  
+    $dbpass = "group4";                // the password that you created, or were given, to access your database  
     
     $maxlength_username = 10;
     $maxlength_first_name = 10;
     $maxlength_last_name = 10;
     $maxlength_password = 10;
+    $maxlength_gender = 10;	
     $maxlength_email = 50;    
     $maxlength_tweet = 140;
     

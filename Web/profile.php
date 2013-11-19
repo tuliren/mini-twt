@@ -14,7 +14,7 @@
 
 <?php
 
-if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST['last_name']) || !empty($_POST['email'])) {
+if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST['last_name']) || !empty($_POST['gender']) || !empty($_POST['email'])) {
     // to use encryption, use the following statement
     // $password = md5(mysql_real_escape_string($_POST['password']));
     if (!empty($_POST['password'])) {
@@ -32,6 +32,11 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
     } else {
         $first_name = $_SESSION['first_name'];
     }
+	if (!empty($_POST['gender'])) {
+		$gender = mysql_real_escape_string($_POST['gender']);
+	} else {
+		$gender = $_SESSION['gender'];
+	}
     if (!empty($_POST['last_name'])) {    
         $last_name = mysql_real_escape_string($_POST['last_name']);
     } else {
@@ -39,7 +44,7 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
     }
     $username = $_SESSION['username'];
     
-    $checkemail = mysql_query("SELECT * FROM users WHERE email = '".$email."'");
+    $checkemail = mysql_query("SELECT * FROM Users WHERE email = '".$email."'");
     
     if (!empty($_POST['email']) && $_POST['email'] != $_SESSION['email'] && mysql_num_rows($checkemail) > 0) {
         echo "<h1>Mini-Twitter Four</h1>";
@@ -47,7 +52,7 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
         echo "<p>Modification failed. This email has been taken. Please <a href=\"profile.php\">try another one</a>.</p>";
         echo "<br / >";
     } else {
-        $modifyquery = mysql_query("UPDATE users SET password='".$password."', first_name='".$first_name."', last_name='".$last_name."', email='".$email."' WHERE username='".$username."'");
+        $modifyquery = mysql_query("UPDATE Users SET password='".$password."', first_name='".$first_name."', last_name='".$last_name."', gender='".$gender."', email='".$email."' WHERE username='".$username."'");
         if ($modifyquery) {
             echo "<h1>Mini-Twitter Four</h1>";
             echo "<br />";
@@ -60,12 +65,13 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
         echo "&nbsp;<a href=\"profile.php\">Go back</a>.</p>";
         
         // retrieve the new information
-        $checklogin = mysql_query("SELECT * FROM users WHERE Username = '".$username."' AND Password = '".$password."'");
+        $checklogin = mysql_query("SELECT * FROM Users WHERE Username = '".$username."' AND Password = '".$password."'");
         $row = mysql_fetch_array($checklogin);
         $email = $row['email'];
         $password = $row['password'];
         $first_name = $row['first_name'];
         $last_name = $row['last_name'];
+        $gender = $row['gender'];		
         $user_id = $row['user_id'];
         $created_date = date("M Y", strtotime($row['created_date']));
         
@@ -74,6 +80,7 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
         $_SESSION['loggedin'] = 1;
         $_SESSION['first_name'] = $first_name;
         $_SESSION['last_name'] = $last_name;
+        $_SESSION['gender'] = $gender;		
         $_SESSION['user_id'] = $user_id;
         $_SESSION['password'] = $password;
         $_SESSION['created_date'] = $created_date;        
@@ -95,6 +102,9 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
         <label for="last_name">Last name</label><label><?=$_SESSION['last_name']?></label>
         <input type="text" name="last_name" id="last_name" maxlength=<?=$maxlength_last_name?> placeholder="new last name"/><br />
         
+        <label for="gender">Gender</label><label><?=$_SESSION['gender']?></label>
+        <input type="text" name="gender" id="gender" maxlength=<?=$maxlength_gender?> placeholder="new gender"/><br />
+                
         <label for="email">Email</label><label><?=$_SESSION['email']?></label>
         <input type="email" name="email" id="email" maxlength=<?=$maxlength_email?> placeholder="new email"/><br />
         

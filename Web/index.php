@@ -18,7 +18,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
     // for encryption, use the following statement:
     // $password = md5(mysql_real_escape_string($_POST['password']));
     $password = mysql_real_escape_string($_POST['password']);
-    $checklogin = mysql_query("SELECT * FROM users WHERE Username = '".$username."' AND Password = '".$password."'");
+    $checklogin = mysql_query("SELECT * FROM Users WHERE Username = '".$username."' AND Password = '".$password."'");
 
     if (mysql_num_rows($checklogin) == 1) {
         $row = mysql_fetch_array($checklogin);  
@@ -26,6 +26,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
         $password = $row['password'];
         $first_name = $row['first_name'];
         $last_name = $row['last_name'];
+        $gender = $row['gender'];		
         $user_id = $row['user_id'];
         $created_date = date("M Y", strtotime($row['created_date']));
         
@@ -34,7 +35,8 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
         $_SESSION['loggedin'] = 1;
         $_SESSION['first_name'] = $first_name;
         $_SESSION['last_name'] = $last_name;
-        $_SESSION['user_id'] = $user_id;
+		$_SESSION['gender'] = $gender; 
+		$_SESSION['user_id'] = $user_id;
         $_SESSION['password'] = $password;
         $_SESSION['created_date'] = $created_date;
         $_SESSION['user_tweet_offset'] = 0;

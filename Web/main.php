@@ -23,7 +23,7 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
     $tweet_text = mysql_real_escape_string($_POST['new_tweet']);
     //var_dump($user_id);
     //var_dump($tweet_text);
-    $newtweet = mysql_query("INSERT INTO tweets (Users_user_id, tweet_text) VALUES(".$user_id.", '".$tweet_text."')");  
+    $newtweet = mysql_query("INSERT INTO Tweets (Users_user_id, tweet_text) VALUES(".$user_id.", '".$tweet_text."')");  
         if ($newtweet) {
             $_SESSION['user_tweet_offset'] = 0;
             echo "<meta http-equiv='refresh' content='0;main.php' />";
@@ -48,7 +48,7 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
             break;
             case 'Older':
                 $new_offset = $_SESSION['user_tweet_offset'] + $tweet_limit;
-                $tweetcount = mysql_query("SELECT tweet_date, tweet_text FROM tweets
+                $tweetcount = mysql_query("SELECT tweet_date, tweet_text FROM Tweets
                                            WHERE Users_user_id=".$user_id."
                                            ORDER BY tweet_date DESC
                                            LIMIT ".$tweet_limit."
@@ -86,7 +86,7 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
     
     <?php
     // display tweets
-    $tweets = mysql_query("SELECT tweet_id, tweet_date, tweet_text FROM tweets
+    $tweets = mysql_query("SELECT tweet_id, tweet_date, tweet_text FROM Tweets
                            WHERE Users_user_id=".$user_id."
                            ORDER BY tweet_date DESC
                            LIMIT ".$tweet_limit."

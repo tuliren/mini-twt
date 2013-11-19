@@ -17,6 +17,7 @@ if (!empty($_POST['username']) &&
     !empty($_POST['password']) &&
     !empty($_POST['first_name'])&&
     !empty($_POST['last_name']) &&
+    !empty($_POST['gender']) &&	
     !empty($_POST['email'])) {
     $username = mysql_real_escape_string($_POST['username']);
     // to use encryption, use the following statement
@@ -25,9 +26,10 @@ if (!empty($_POST['username']) &&
     $email = mysql_real_escape_string($_POST['email']);
     $first_name = mysql_real_escape_string($_POST['first_name']);
     $last_name = mysql_real_escape_string($_POST['last_name']);
+    $gender = mysql_real_escape_string($_POST['gender']);	
     
-    $checkusername = mysql_query("SELECT * FROM users WHERE username = '".$username."'");
-    $checkemail = mysql_query("SELECT * FROM users WHERE email = '".$email."'");
+    $checkusername = mysql_query("SELECT * FROM Users WHERE username = '".$username."'");
+    $checkemail = mysql_query("SELECT * FROM Users WHERE email = '".$email."'");
 
     if (mysql_num_rows($checkusername) > 0) {
         echo "<h1>Mini-Twitter Four</h1>";
@@ -40,7 +42,7 @@ if (!empty($_POST['username']) &&
         echo "<p>Registration failed. This email has been taken. Please <a href=\"register.php\">try again</a>.</p>";
         echo "<br / >";
     } else {
-        $registerquery = mysql_query("INSERT INTO users (username, password, first_name, last_name, email) VALUES('".$username."', '".$password."', '".$first_name."', '".$last_name."','".$email."')");  
+        $registerquery = mysql_query("INSERT INTO Users (username, password, first_name, last_name, gender, email) VALUES('".$username."', '".$password."', '".$first_name."', '".$last_name."','".$gender."', '".$email."')");  
         if ($registerquery) {
             echo "<h1>Mini-Twitter Four</h1>";
             echo "<br />";
@@ -76,6 +78,10 @@ if (!empty($_POST['username']) &&
         <input type="password" name="password" id="password" maxlength=<?=$maxlength_password?>
                placeholder="max 10 characters" required/><br />
         
+        <label for="gender">Gender</label>
+        <input type="text" name="gender" id="gender" maxlength=<?=$maxlength_gender?>
+               placeholder="max 10 characters" required/><br />
+			   
         <label for="email">Email</label>
         <input type="email" name="email" id="email" maxlength=<?=$maxlength_email?>
                placeholder="max 50 characters" required/><br />
