@@ -11,7 +11,7 @@ LAMP / WAMP
 - [Schema](https://github.iu.edu/CS506/Fall2013-Group4/blob/master/DatabaseSchema/DatabaseSchemaFinal.txt)
 - host: localhost
 - username: root
-- password: root
+- password: group4
 
 ## Web
 
