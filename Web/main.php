@@ -71,7 +71,7 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
     <form method="post" action="main.php" name="tweetform" id="tweetform">
         <fieldset>
             <label for="new_tweet_label">Write a new tweet</label><br />
-            <textarea name="new_tweet" id="new_tweet" maxlength=<?php echo $maxlength_tweet; ?> style="resize: none;" rows=5 cols=100 placeholder="max 140 characters" required></textarea>
+            <textarea name="new_tweet" id="new_tweet" maxlength=<?php echo $maxlength_tweet; ?> style="resize: none;" rows=5 cols=80 placeholder="max 140 characters" required></textarea>
             <br />
             <input type="submit" name="tweet" id="tweet" value="Tweet" />
         </fieldset>

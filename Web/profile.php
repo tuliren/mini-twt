@@ -95,23 +95,24 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
     <p>Personal profile for <b><?php echo $_SESSION['username']; ?></b> (joined since <?php echo $_SESSION['created_date']; ?>)</p>
     <br />
     <form method="post" action="profile.php" name="modifyform" id="modifyform">  
-    <fieldset>        
+    <fieldset>
+        <label for="password">Password</label><label>******</label>
+        <input type="password" name="password" id="password" maxlength=<?php echo $maxlength_password; ?> placeholder="new password"/><br />
+    
         <label for="first_name">First name</label><label><?php echo $_SESSION['first_name']; ?></label>
         <input type="text" name="first_name" id="first_name" maxlength=<?php echo $maxlength_first_name; ?> placeholder="new first name"/><br />
         
         <label for="last_name">Last name</label><label><?php echo $_SESSION['last_name']; ?></label>
         <input type="text" name="last_name" id="last_name" maxlength=<?php echo $maxlength_last_name; ?> placeholder="new last name"/><br />
+              
+        <label for="email">Email</label><label><?php echo $_SESSION['email']; ?></label>
+        <input type="email" name="email" id="email" maxlength=<?php echo $maxlength_email; ?> placeholder="new email"/><br />        
         
         <label for="gender">Gender</label><label><?php echo $_SESSION['gender']; ?></label>
-        <input type="text" name="gender" id="gender" maxlength=<?php echo $maxlength_gender; ?> placeholder="new gender"/><br />
-                
-        <label for="email">Email</label><label><?php echo $_SESSION['email']; ?></label>
-        <input type="email" name="email" id="email" maxlength=<?php echo $maxlength_email; ?> placeholder="new email"/><br />
+        <input type="radio" name="gender" id="g1" value="male">&nbsp;Male&nbsp;&nbsp;
+        <input type="radio" name="gender" id="g2" value="female">&nbsp;Female
         
-        <label for="password">Password</label><label>******</label>
-        <input type="password" name="password" id="password" maxlength=<?php echo $maxlength_password; ?> placeholder="new password"/><br />
-        
-        <br />
+        <br /><br />
         <input type="submit" name="modify" id="modify" value="Modify" />
         
     </fieldset>
