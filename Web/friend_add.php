@@ -57,7 +57,6 @@
                 <p>Adding friend failed. Please <a href="members.php">go back</a> and try again.</p>
                 <?php
             }
-        }
-        
+        }        
     }
 ?>

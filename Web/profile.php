@@ -14,6 +14,8 @@
 
 <?php
 
+$_SESSION['search_username'] = "";
+
 if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST['last_name']) || !empty($_POST['gender']) || !empty($_POST['email'])) {
     // to use encryption, use the following statement
     // $password = md5(mysql_real_escape_string($_POST['password']));
@@ -83,7 +85,7 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
         $_SESSION['gender'] = $gender;		
         $_SESSION['user_id'] = $user_id;
         $_SESSION['password'] = $password;
-        $_SESSION['created_date'] = $created_date;        
+        $_SESSION['created_date'] = $created_date;
     }
     
     

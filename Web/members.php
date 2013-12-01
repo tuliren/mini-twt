@@ -14,8 +14,6 @@
 
 <?php
 
-
-
 if (!empty($_SESSION['loggedin'])) {
     if (!empty($_POST['username_string'])) {
         $_SESSION['search_username'] = $_POST['username_string'];
@@ -23,6 +21,7 @@ if (!empty($_SESSION['loggedin'])) {
     }
     if (!empty($_POST['list_all'])) {
         $_SESSION['search_username'] = "";
+        $_SESSION['username_offset'] = 0;
     }
     
     $user_id = (int) $_SESSION['user_id'];
@@ -61,7 +60,6 @@ if (!empty($_SESSION['loggedin'])) {
     </p>
     <br />
     <p>Search username</p>
-    <br />
     <form method="post" action="members.php" name="searchuser" id="searchuser">
         <fieldset>            
             <input for="username_string" type="text" name="username_string"
@@ -74,18 +72,37 @@ if (!empty($_SESSION['loggedin'])) {
     </form>
     <br />
     <br />
-    <form method="post" action="members.php" name="showtweets">
-        <input type="submit" name="showusers" value="Prev">
-        <input type="submit" name="showusers" value="Next">
-    </form>
-    <br />
     <?php
-    // list all users
+    $totalusers = mysql_query("SELECT user_id, username, first_name, last_name, created_date FROM Users
+                             WHERE username LIKE '%".$_SESSION['search_username']."%'");
+    
     $allusers = mysql_query("SELECT user_id, username, first_name, last_name, created_date FROM Users
                              WHERE username LIKE '%".$_SESSION['search_username']."%'
                              ORDER BY username ASC
                              LIMIT ".$user_limit."
                              OFFSET ".$_SESSION['username_offset']."");
+                             
+    $total_user_count = mysql_num_rows($totalusers);
+    $current_user_count = mysql_num_rows($allusers);
+    $first_count = $_SESSION['username_offset'] + 1;
+    $last_count = $_SESSION['username_offset'] + $current_user_count;
+    $search_string = $_SESSION['search_username'];
+    if (empty($_SESSION['search_username'])) {
+        echo "<p>Listing user $first_count - $last_count of all $total_user_count users</p>";
+    } else {
+        echo "<p>Listing user $first_count - $last_count of the $total_user_count users whose username contains \"$search_string\"</p>";
+    }
+    
+    ?>
+    <br />    
+    <form method="post" action="members.php" name="showtweets">
+        <input type="submit" name="showusers" value="Prev">
+        <input type="submit" name="showusers" value="Next">
+    </form>
+    
+    <?php
+    // list all users
+    
     while($row = mysql_fetch_array($allusers)){
         $friend_id = $row['user_id'];
         $username = $row['username'];
@@ -99,14 +116,6 @@ if (!empty($_SESSION['loggedin'])) {
         <br /><br />
         <?php
     }
-    ?>
-    
-    <form method="post" action="members.php" name="showtweets">
-        <input type="submit" name="showusers" value="Prev">
-        <input type="submit" name="showusers" value="Next">
-    </form>
-    
-    <?php
 } else {
     ?>
 

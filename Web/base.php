@@ -27,7 +27,7 @@
     $maxlength_tweet = 140;
     
     $tweet_limit = 5;
-    $user_limit = 20;
+    $user_limit = 10;
     
     $friend_limit = 20;
     

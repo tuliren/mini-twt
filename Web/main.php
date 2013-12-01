@@ -14,7 +14,7 @@
 
 <?php
 
-
+$_SESSION['search_username'] = "";
 
 if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) { 
     $user_id = (int) $_SESSION['user_id'];
@@ -82,6 +82,25 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
     </form>
     <br />
     <br />
+    <?php
+    
+    $all_tweets = mysql_query("SELECT tweet_id, tweet_date, tweet_text FROM Tweets
+                               WHERE Users_user_id=".$user_id."");
+    
+    $tweets = mysql_query("SELECT tweet_id, tweet_date, tweet_text FROM Tweets
+                           WHERE Users_user_id=".$user_id."
+                           ORDER BY tweet_date DESC
+                           LIMIT ".$tweet_limit."
+                           OFFSET ".$_SESSION['user_tweet_offset']."");
+    
+    $total_tweet_count = mysql_num_rows($all_tweets);
+    $current_tweet_count = mysql_num_rows($tweets);
+    $first_tweet_count = $_SESSION['user_tweet_offset'] + 1;
+    $last_tweet_count = $_SESSION['user_tweet_offset'] + $current_tweet_count;
+    $search_string = $_SESSION['search_username'];    
+    echo "<p>Listing tweet $first_tweet_count - $last_tweet_count of all $total_tweet_count tweets</p>";    
+    
+    ?>
     <form method="post" action="main.php" name="showtweets">
         <input type="submit" name="showtweets" value="Newer">
         <input type="submit" name="showtweets" value="Older">
@@ -89,11 +108,7 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
     
     <?php
     // display tweets
-    $tweets = mysql_query("SELECT tweet_id, tweet_date, tweet_text FROM Tweets
-                           WHERE Users_user_id=".$user_id."
-                           ORDER BY tweet_date DESC
-                           LIMIT ".$tweet_limit."
-                           OFFSET ".$_SESSION['user_tweet_offset']."");
+    
     while($row = mysql_fetch_array($tweets)){
         $tweet_id = (int) $row['tweet_id'];
         ?>
@@ -104,16 +119,9 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
             <textarea name="tweet" id="tweet" disabled rows=2 cols=80 align=left style="resize: none;"><?php echo $row['tweet_text']; ?></textarea>
             <br /><br />
         </fieldset>
-        </form>
-    
+        </form>    
     <?php    
     }
-    ?>
-    <form method="post" action="main.php" name="showtweets">
-        <input type="submit" name="showtweets" value="Newer">
-        <input type="submit" name="showtweets" value="Older">
-    </form>
-    <?php
 } else {
     ?>
 
