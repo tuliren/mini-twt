@@ -14,6 +14,8 @@
 
 <?php
 
+$_SESSION['search_username'] = "";
+
 if (!empty($_SESSION['loggedin'])) {
     
     $user_id = (int) $_SESSION['user_id'];
@@ -27,7 +29,7 @@ if (!empty($_SESSION['loggedin'])) {
        <a href="logout.php">Logout</a>
     </p>    
     <br />
-    
+
     <?php
     $friend_attribute_query = mysql_query("SELECT username, friends FROM Users WHERE user_id= ".$user_id."");
     $friends = "";
@@ -35,7 +37,10 @@ if (!empty($_SESSION['loggedin'])) {
         $friends = $row['friends'];
         $friend_list = explode(";", $friends);
     }
-    $friend_count = count($friend_list);     
+    $friend_count = 0;
+    foreach($friend_list as $friend_id_string) {
+        if (!empty($friend_id_string)) ++$friend_count;
+    }
     
     if ($friend_count == 0) {
         echo "<p>You have not added any friend</p>";
@@ -46,7 +51,6 @@ if (!empty($_SESSION['loggedin'])) {
     }
     echo "<br />";
     
-        
     // list all friends
     foreach ($friend_list as $friend_id_string) {
         $friend_id = (int) $friend_id_string;
