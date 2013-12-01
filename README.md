@@ -2,9 +2,12 @@ Mini Twitter Four
 ============================================
 CSCI 50600 course project, group #4
 
-## Dependencies
+## Website
+http://ec2-54-200-186-219.us-west-2.compute.amazonaws.com
 
-LAMP / WAMP
+## Front / back end
+
+Apache, MySQL, PHP, Java
 
 ## Database settings
 
@@ -14,10 +17,11 @@ LAMP / WAMP
 - password: group4
 
 ## Web
-
 - Put all files under `./Web` into the `www` folder of LAMP / WAMP.
-
 - Launch the web browser and go to `localhost/index.php` to start.
 
-
 ## Mobile
+
+## References
+- [login / registration](http://net.tutsplus.com/tutorials/php/user-membership-with-php/)
+- [record deletion in PHP](http://webdesignpeeps.com/delete-records-from-mysql-database-using-php/)

@@ -90,7 +90,10 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
 } else if (!empty($_SESSION['loggedin']) && !empty($_SESSION['username'])) {
     ?>
     <h1>Mini-Twitter Four</h1>    
-    <p><a href="main.php">Main page</a>&nbsp;<a href="logout.php">Logout</a></p>    
+    <p><a href="main.php">My Page</a>&nbsp;
+       My Profile&nbsp;
+       <a href="members.php">All Users</a>&nbsp;
+       <a href="logout.php">Logout</a></p>    
     <br />
     <p>Personal profile for <b><?php echo $_SESSION['username']; ?></b> (joined since <?php echo $_SESSION['created_date']; ?>)</p>
     <br />

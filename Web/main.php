@@ -63,7 +63,11 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
     }
     ?>    
     <h1>Mini-Twitter Four</h1>
-    <p><a href="profile.php">Profile</a>&nbsp;<a href="logout.php">Logout</a></p>
+    <p>My Page&nbsp;
+       <a href="profile.php">My Profile</a>&nbsp;
+       <a href="members.php">All Users</a>&nbsp;
+       <a href="logout.php">Logout</a>
+    </p>
     <br />
     <p>Welcome, <b><?php echo $_SESSION['first_name']; ?></b>.</p>    
     
@@ -96,13 +100,8 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
         <form method="post" action="main.php" name="tweet" id="tweet">
         <fieldset>
             <label><?php echo $row['tweet_date']; ?></label>&nbsp;<a href="delete.php?tweet_id=<?php echo $tweet_id; ?>">Delete</a>
-            <!--
-            <form method="post" action="main.php" name="deletetweet">
-                <input type="submit" name="deletetweet" id="deletetweet" value="Delete" />
-            </form>
-            -->
             <br />
-            <textarea name="tweet" id="tweet" disabled rows=2 cols=100 align=left style="resize: none;"><?php echo $row['tweet_text']; ?></textarea>
+            <textarea name="tweet" id="tweet" disabled rows=2 cols=80 align=left style="resize: none;"><?php echo $row['tweet_text']; ?></textarea>
             <br /><br /><br />
         </fieldset>
         </form>
