@@ -1,10 +1,22 @@
 <?php
-    include('base.php');
+    include "base.php";
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Mini-Twitter Four</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="main">
+
+<?php
     
     $id = (int) $_GET['tweet_id'];
     $tweetdelete = mysql_query("DELETE FROM Tweets WHERE tweet_id= ".$id."");
-     
-    // if the above query execute without a glitch, then we’ll redirect the user to the / // previous page
+    
     if ($tweetdelete) {
         $user_id = $_SESSION['user_id'];
         // these code can be simplified by using a $_SESSION['tweet_count'] to track the number of tweets

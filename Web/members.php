@@ -70,14 +70,14 @@ if (!empty($_SESSION['loggedin'])) {
                            LIMIT ".$user_limit."
                            OFFSET ".$_SESSION['username_offset']."");
     while($row = mysql_fetch_array($allusers)){
-        $user_id = $row['user_id'];
+        $friend_id = $row['user_id'];
         $username = $row['username'];
         $first_name = $row['first_name'];
         $last_name = $row['last_name'];
         $created_date = date("M Y", strtotime($row['created_date']));
         
         ?>
-        <a href="delete.php?user_id=<?php echo $user_id; ?>">Add to Friend</a>
+        <a href="friend_add.php?user_id=<?php echo $user_id; ?>&friend_id=<?php echo $friend_id; ?>">Add to Friend</a>
         <b><?php echo $username; ?></b>, <?php echo $first_name; ?> <?php echo $last_name; ?>, joined since <?php echo $created_date; ?>
         <br /><br />
         <?php
