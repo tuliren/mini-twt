@@ -2,20 +2,25 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
+CREATE SCHEMA IF NOT EXISTS `Twitter_Group_Four` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `Twitter_Group_Four` ;
 
 -- -----------------------------------------------------
 -- Table `Twitter_Group_Four`.`Users`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Twitter_Group_Four`.`Users` (
   `user_id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(50) NOT NULL,
-  `password` VARCHAR(50) NOT NULL,  
-  `first_name` VARCHAR(50) NOT NULL,
-  `last_name` VARCHAR(50) NOT NULL,
-  `email` VARCHAR(50) NOT NULL,
-  `gender` VARCHAR(10) NOT NULL,
+  `username` VARCHAR(50) NOT NULL DEFAULT '(Blank)',
+  `first_name` VARCHAR(50) NOT NULL DEFAULT '(Blank)',
+  `last_name` VARCHAR(50) NOT NULL DEFAULT '(Blank)',
+  `email` VARCHAR(50) NOT NULL DEFAULT '(Blank)',
+  `password` VARCHAR(50) NOT NULL DEFAULT '(Blank)',
+  `gender` VARCHAR(10) NOT NULL DEFAULT '(Blank)',
   `created_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`user_id`))
+  `friends` VARCHAR(100) NULL DEFAULT '(Blank)',
+  PRIMARY KEY (`user_id`),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB;
 
 
@@ -23,8 +28,8 @@ ENGINE = InnoDB;
 -- Table `Twitter_Group_Four`.`Tweets`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Twitter_Group_Four`.`Tweets` (
-  `tweet_id` INT NOT NULL AUTO_INCREMENT,
-  `tweet_text` VARCHAR(140) NOT NULL,
+  `tweet_id` INT NULL,
+  `tweet_text` VARCHAR(140) NOT NULL DEFAULT '(Blank)',
   `tweet_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `Users_user_id` INT NOT NULL,
   PRIMARY KEY (`tweet_id`),
