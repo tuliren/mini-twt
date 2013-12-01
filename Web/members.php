@@ -17,9 +17,17 @@
 
 
 if (!empty($_SESSION['loggedin'])) {
+    if (!empty($_POST['username_string'])) {
+        $_SESSION['search_username'] = $_POST['username_string'];
+        $_SESSION['username_offset'] = 0;
+    }
+    if (!empty($_POST['list_all'])) {
+        $_SESSION['search_username'] = "";
+    }
+    
     $user_id = (int) $_SESSION['user_id'];
     
-    // display prev or next tweets    
+    // display prev or next users
     if (!empty($_POST['showusers'])) {
         switch ($_POST['showusers']) {
             case 'Prev':
@@ -31,7 +39,8 @@ if (!empty($_SESSION['loggedin'])) {
             break;
             case 'Next':
                 $new_user_offset = $_SESSION['username_offset'] + $user_limit;
-                $usercount = mysql_query("SELECT user_id, username, first_name, last_name, gender FROM Users                                          
+                $usercount = mysql_query("SELECT user_id, username, first_name, last_name, gender FROM Users  
+                                          WHERE username LIKE '%".$_SESSION['search_username']."%'                
                                           ORDER BY username ASC
                                           LIMIT ".$user_limit."
                                           OFFSET ".$new_user_offset."");
@@ -55,20 +64,28 @@ if (!empty($_SESSION['loggedin'])) {
     <br />
     <form method="post" action="members.php" name="searchuser" id="searchuser">
         <fieldset>            
-            <input type="text" name="username" id="username" maxlength=<?php echo $maxlength_username; ?> placeholder="username"/>
-            <input type="submit" name="search" id="search" value="Search" />
+            <input for="username_string" type="text" name="username_string"
+                   id="username_string" maxlength=<?php echo $maxlength_username; ?>
+                   placeholder="username"
+            />
+            <input type="submit" name="search" id="search" value="Search"/>
+            <input name="list_all" type="submit" value="List all users"/>
         </fieldset>
     </form>
     <br />
     <br />
-    <p>Registered users</p>
+    <form method="post" action="members.php" name="showtweets">
+        <input type="submit" name="showusers" value="Prev">
+        <input type="submit" name="showusers" value="Next">
+    </form>
     <br />
     <?php
-    // display tweets
-    $allusers = mysql_query("SELECT user_id, username, first_name, last_name, created_date FROM Users                                          
-                           ORDER BY username ASC
-                           LIMIT ".$user_limit."
-                           OFFSET ".$_SESSION['username_offset']."");
+    // list all users
+    $allusers = mysql_query("SELECT user_id, username, first_name, last_name, created_date FROM Users
+                             WHERE username LIKE '%".$_SESSION['search_username']."%'
+                             ORDER BY username ASC
+                             LIMIT ".$user_limit."
+                             OFFSET ".$_SESSION['username_offset']."");
     while($row = mysql_fetch_array($allusers)){
         $friend_id = $row['user_id'];
         $username = $row['username'];

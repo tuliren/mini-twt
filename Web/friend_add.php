@@ -23,11 +23,11 @@
     }
     $friend_count = count($friend_list);
 
-    if ($friend_count == 20) {
+    if ($friend_count >= $friend_limit) {
         echo "<h1>Mini-Twitter Four</h1>";
         echo "<br />";
         echo "<p>You have friended 20 users and cannot add more friends. <a href=\"members.php\">Go back</a>.</p>";
-    } else if ($friend_count < 20) {
+    } else {
         $friend_already = false;
         foreach ($friend_list as $friend) {
             if ((int) $friend == $friend_id) {
@@ -58,5 +58,6 @@
                 <?php
             }
         }
+        
     }
 ?>

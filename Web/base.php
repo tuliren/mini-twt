@@ -13,10 +13,10 @@
     
     session_start();
   
-    $dbhost = "localhost";           // this will usually be 'localhost', but can sometimes differ  
-    $dbname = "Twitter_Group_Four";  // the name of the database that you are going to use for this project  
-    $dbuser = "root";                // the username that you created, or were given, to access your database  
-    $dbpass = "group4";                // the password that you created, or were given, to access your database  
+    $dbhost = "localhost";
+    $dbname = "Twitter_Group_Four";
+    $dbuser = "root";
+    $dbpass = "group4";
     
     $maxlength_username = 10;
     $maxlength_first_name = 10;
@@ -28,6 +28,8 @@
     
     $tweet_limit = 5;
     $user_limit = 20;
+    
+    $friend_limit = 20;
     
     mysql_connect($dbhost, $dbuser, $dbpass) or die("MySQL Error: " . mysql_error());  
     mysql_select_db($dbname) or die("MySQL Error: " . mysql_error());  

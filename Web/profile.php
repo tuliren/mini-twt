@@ -107,7 +107,7 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
         
         <label for="last_name">Last name</label><label><?php echo $_SESSION['last_name']; ?></label>
         <input type="text" name="last_name" id="last_name" maxlength=<?php echo $maxlength_last_name; ?> placeholder="new last name"/><br />
-              
+
         <label for="email">Email</label><label><?php echo $_SESSION['email']; ?></label>
         <input type="email" name="email" id="email" maxlength=<?php echo $maxlength_email; ?> placeholder="new email"/><br />        
         
