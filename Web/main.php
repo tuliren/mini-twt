@@ -63,8 +63,9 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
     }
     ?>    
     <h1>Mini-Twitter Four</h1>
-    <p>My Page&nbsp;
+    <p>My Tweets&nbsp;
        <a href="profile.php">My Profile</a>&nbsp;
+       <a href="friend_list.php">My Friends</a>&nbsp;
        <a href="members.php">All Users</a>&nbsp;
        <a href="logout.php">Logout</a>
     </p>

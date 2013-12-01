@@ -92,8 +92,9 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
 } else if (!empty($_SESSION['loggedin']) && !empty($_SESSION['username'])) {
     ?>
     <h1>Mini-Twitter Four</h1>    
-    <p><a href="main.php">My Page</a>&nbsp;
+    <p><a href="main.php">My Tweets</a>&nbsp;
        My Profile&nbsp;
+       <a href="friend_list.php">My Friends</a>&nbsp;
        <a href="members.php">All Users</a>&nbsp;
        <a href="logout.php">Logout</a></p>    
     <br />
