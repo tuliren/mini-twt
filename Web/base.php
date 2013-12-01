@@ -18,11 +18,11 @@
     $dbuser = "root";
     $dbpass = "group4";
     
-    $maxlength_username = 10;
+    $maxlength_username = 15;
     $maxlength_first_name = 10;
     $maxlength_last_name = 10;
-    $maxlength_password = 10;
-    $maxlength_gender = 10;	
+    $maxlength_password = 15;
+    $minlength_password = 6;
     $maxlength_email = 50;    
     $maxlength_tweet = 140;
     

@@ -16,6 +16,16 @@
     
     $user_id = (int) $_GET['user_id'];
     $friend_id = (int) $_GET['friend_id'];
+    
+    if ($user_id == $friend_id) {
+        ?>
+        <h1>Mini-Twitter Four</h1>
+        <br />
+        <p>You cannot add yourself as a friend. <a href="members.php">Go back</a>.</p>
+        <?php
+        return;
+    }
+    
     $user_to_add = mysql_query("SELECT username, friends FROM Users WHERE user_id= ".$user_id."");
     if ($row = mysql_fetch_assoc($user_to_add)) {
         $friends = $row['friends'];

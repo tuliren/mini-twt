@@ -56,7 +56,8 @@ if (!empty($_SESSION['loggedin'])) {
     <p><a href="Main.php">My Tweets</a>&nbsp;
        <a href="profile.php">My Profile</a>&nbsp;
        <a href="friend_list.php">My Friends</a>&nbsp;
-       All Users&nbsp;
+       <a href="friend_tweets.php">Friend Tweets</a>&nbsp;
+       <i>All Users</i>&nbsp;
        <a href="logout.php">Logout</a>
     </p>
     <br />
@@ -133,7 +134,7 @@ if (!empty($_SESSION['loggedin'])) {
         
         ?>
         <a href="friend_add.php?user_id=<?php echo $user_id; ?>&friend_id=<?php echo $friend_id; ?>">Add to Friend</a>
-        <b><?php echo $username; ?></b>, <?php echo $first_name; ?> <?php echo $last_name; ?>, joined since <?php echo $created_date; ?>
+        <b><?php echo $first_name; ?> <?php echo $last_name; ?></b> (<?php echo $username; ?>) joined since <?php echo $created_date; ?>
         <br /><br />
         <?php
     }

@@ -63,14 +63,15 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
     }
     ?>    
     <h1>Mini-Twitter Four</h1>
-    <p>My Tweets&nbsp;
+    <p><i>My Tweets</i>&nbsp;
        <a href="profile.php">My Profile</a>&nbsp;
        <a href="friend_list.php">My Friends</a>&nbsp;
+       <a href="friend_tweets.php">Friend Tweets</a>&nbsp;
        <a href="members.php">All Users</a>&nbsp;
        <a href="logout.php">Logout</a>
     </p>
     <br />
-    <p>Welcome, <b><?php echo $_SESSION['first_name']; ?></b>.</p>    
+    <p>Welcome, <b><?php echo $_SESSION['first_name']; ?></b></p>    
     
     <br />
     <form method="post" action="main.php" name="tweetform" id="tweetform">

@@ -24,7 +24,8 @@ if (!empty($_SESSION['loggedin'])) {
     <h1>Mini-Twitter Four</h1>
     <p><a href="Main.php">My Tweets</a>&nbsp;
        <a href="profile.php">My Profile</a>&nbsp;
-       My Friends&nbsp;
+       <i>My Friends</i>&nbsp;
+       <a href="friend_tweets.php">Friend Tweets</a>&nbsp;
        <a href="members.php">All Users</a>&nbsp;
        <a href="logout.php">Logout</a>
     </p>    

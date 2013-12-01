@@ -93,8 +93,9 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
     ?>
     <h1>Mini-Twitter Four</h1>    
     <p><a href="main.php">My Tweets</a>&nbsp;
-       My Profile&nbsp;
+       <i>My Profile</i>&nbsp;
        <a href="friend_list.php">My Friends</a>&nbsp;
+       <a href="friend_tweets.php">Friend Tweets</a>&nbsp;
        <a href="members.php">All Users</a>&nbsp;
        <a href="logout.php">Logout</a></p>    
     <br />
