@@ -88,9 +88,29 @@ if (!empty($_SESSION['loggedin'])) {
     $last_count = $_SESSION['username_offset'] + $current_user_count;
     $search_string = $_SESSION['search_username'];
     if (empty($_SESSION['search_username'])) {
-        echo "<p>Listing user $first_count - $last_count of all $total_user_count users</p>";
+        if ($total_user_count == 0) {
+            echo "<p>No registered user, you must be a ghost</p>";
+        } else if ($total_user_count == 1) {
+            echo "<p>You are the only registered user</p>";
+        } else {
+            if ($current_user_count == 1) {
+                echo "<p>Listing user $first_count of all $total_user_count users</p>";
+            } else {
+                echo "<p>Listing user $first_count - $last_count of all $total_user_count users</p>";
+            }
+        }
     } else {
-        echo "<p>Listing user $first_count - $last_count of the $total_user_count users whose username contains \"$search_string\"</p>";
+        if ($total_user_count == 0) {
+            echo "<p>No registered user, you must be a ghost</p>";
+        } else if ($total_user_count == 1) {
+            echo "<p>You are the only registered user</p>";
+        } else {
+            if ($current_user_count == 1) {
+                echo "<p>Listing user $first_count of all $total_user_count users</p>";
+            } else {
+                echo "<p>Listing user $first_count - $last_count of the $total_user_count users whose username contains \"$search_string\"</p>";
+            }
+        }
     }
     
     ?>

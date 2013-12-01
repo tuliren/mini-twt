@@ -98,9 +98,20 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
     $first_tweet_count = $_SESSION['user_tweet_offset'] + 1;
     $last_tweet_count = $_SESSION['user_tweet_offset'] + $current_tweet_count;
     $search_string = $_SESSION['search_username'];    
-    echo "<p>Listing tweet $first_tweet_count - $last_tweet_count of all $total_tweet_count tweets</p>";    
+    if ($total_tweet_count == 0) {
+        echo "<p>No tweet has been posted</p>";
+    } else if ($total_tweet_count == 1) {
+        echo "<p>Listing the only posted tweet</p>";
+    } else {
+        if ($current_tweet_count == 1) {
+            echo "<p>Listing tweet $first_tweet_count of all $total_tweet_count tweets</p>";
+        } else {
+            echo "<p>Listing tweet $first_tweet_count - $last_tweet_count of all $total_tweet_count tweets</p>";
+        }
+    }
     
     ?>
+    <br />
     <form method="post" action="main.php" name="showtweets">
         <input type="submit" name="showtweets" value="Newer">
         <input type="submit" name="showtweets" value="Older">
