@@ -46,11 +46,13 @@ if (!empty($_POST['username']) &&
         if ($registerquery) {
             echo "<h1>Mini-Twitter Four</h1>";
             echo "<br />";
-            echo "<p>Registration succeeded. Please <a href=\"index.php\">go back</a> to login.</p>";  
+            echo "<p>Registration succeeded. Please <a href=\"index.php\">go back</a> to login.</p>";
+            echo "<br />";
         } else {
             echo "<h1>Mini-Twitter Four</h1>";
             echo "<br />";
             echo "<p>Registration failed. Please <a href=\"register.php\">try again</a>.</p>";
+            echo "<br />";
         }
     }
 } else {
@@ -85,7 +87,7 @@ if (!empty($_POST['username']) &&
         
         <input type="submit" name="register" id="register" value="Register" />
     </fieldset>
-    </form>
+    </form>    
 
     <?php
 }

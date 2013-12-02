@@ -99,7 +99,7 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
        <a href="members.php">All Users</a>&nbsp;
        <a href="logout.php">Logout</a></p>    
     <br />
-    <p>Personal profile for <b><?php echo $_SESSION['username']; ?></b> (joined since <?php echo $_SESSION['created_date']; ?>)</p>
+    <h2>Personal profile for <?php echo $_SESSION['username']; ?> (joined since <?php echo $_SESSION['created_date']; ?>)</h2>
     <br />
     <form method="post" action="profile.php" name="modifyform" id="modifyform">  
     <fieldset>
@@ -123,8 +123,7 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
         <input type="submit" name="modify" id="modify" value="Modify" />
         
     </fieldset>
-    </form>
-    <br />
+    </form>    
 
     <?php
 } else {

@@ -61,7 +61,7 @@ if (!empty($_SESSION['loggedin'])) {
        <a href="logout.php">Logout</a>
     </p>
     <br />
-    <p>Search username</p>
+    <h2>Search username</h2>
     <form method="post" action="members.php" name="searchuser" id="searchuser">
         <fieldset>            
             <input for="username_string" type="text" name="username_string"
@@ -72,7 +72,6 @@ if (!empty($_SESSION['loggedin'])) {
             <input name="list_all" type="submit" value="List all users"/>
         </fieldset>
     </form>
-    <br />
     <br />
     <?php
     $totalusers = mysql_query("SELECT user_id, username, first_name, last_name, created_date FROM Users
@@ -91,40 +90,32 @@ if (!empty($_SESSION['loggedin'])) {
     $search_string = $_SESSION['search_username'];
     if (empty($_SESSION['search_username'])) {
         if ($total_user_count == 0) {
-            echo "<p>No registered user, you must be a ghost</p>";
+            echo "<h2>No registered user, you must be a ghost</h2>";
         } else if ($total_user_count == 1) {
-            echo "<p>You are the only registered user</p>";
+            echo "<h2>You are the only registered user</h2>";
         } else {
             if ($current_user_count == 1) {
-                echo "<p>Listing user $first_count of all $total_user_count users</p>";
+                echo "<h2>Listing user $first_count of all $total_user_count users</h2>";
             } else {
-                echo "<p>Listing user $first_count - $last_count of all $total_user_count users</p>";
+                echo "<h2>Listing user $first_count - $last_count of all $total_user_count users</h2>";
             }
         }
     } else {
         if ($total_user_count == 0) {
-            echo "<p>No registered user, you must be a ghost</p>";
+            echo "<h2>No registered user, you must be a ghost</h2>";
         } else if ($total_user_count == 1) {
-            echo "<p>You are the only registered user</p>";
+            echo "<h2>You are the only registered user</h2>";
         } else {
             if ($current_user_count == 1) {
-                echo "<p>Listing user $first_count of all $total_user_count users</p>";
+                echo "<h2>Listing user $first_count of all $total_user_count users</h2>";
             } else {
-                echo "<p>Listing user $first_count - $last_count of the $total_user_count users whose username contains \"$search_string\"</p>";
+                echo "<h2>Listing user $first_count - $last_count of the $total_user_count users whose username contains \"$search_string\"</h2>";
             }
         }
     }
     
-    ?>
-    <br />    
-    <form method="post" action="members.php" name="showtweets">
-        <input type="submit" name="showusers" value="Prev">
-        <input type="submit" name="showusers" value="Next">
-    </form>
     
-    <?php
-    // list all users
-    
+    // list all users    
     while($row = mysql_fetch_array($allusers)){
         $friend_id = $row['user_id'];
         $username = $row['username'];
@@ -138,6 +129,15 @@ if (!empty($_SESSION['loggedin'])) {
         <br /><br />
         <?php
     }
+    
+    ?>  
+    <form method="post" action="members.php" name="showtweets">
+        <input type="submit" name="showusers" value="Prev">
+        <input type="submit" name="showusers" value="Next">
+    </form>
+    
+    <?php
+    
 } else {
     ?>
 

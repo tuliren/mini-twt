@@ -63,6 +63,7 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
     }
     ?>    
     <h1>Mini-Twitter Four</h1>
+    
     <p><i>My Tweets</i>&nbsp;
        <a href="profile.php">My Profile</a>&nbsp;
        <a href="friend_list.php">My Friends</a>&nbsp;
@@ -71,18 +72,17 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
        <a href="logout.php">Logout</a>
     </p>
     <br />
-    <p>Welcome, <b><?php echo $_SESSION['first_name']; ?></b></p>    
+    <h2>Welcome, <?php echo $_SESSION['first_name']; ?></h2>    
     
     <br />
     <form method="post" action="main.php" name="tweetform" id="tweetform">
         <fieldset>
-            <label for="new_tweet_label">Write a new tweet</label><br />
-            <textarea name="new_tweet" id="new_tweet" maxlength=<?php echo $maxlength_tweet; ?> style="resize: none;" rows=5 cols=80 placeholder="max 140 characters" required></textarea>
+            <h2>Write a new tweet</h2>
+            <textarea name="new_tweet" id="new_tweet" maxlength=<?php echo $maxlength_tweet; ?> rows=3 cols=80 placeholder="max 140 characters" required></textarea>
             <br />
             <input type="submit" name="tweet" id="tweet" value="Tweet" />
         </fieldset>
     </form>
-    <br />
     <br />
     <?php
     
@@ -101,25 +101,18 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
     $last_tweet_count = $_SESSION['user_tweet_offset'] + $current_tweet_count;
     $search_string = $_SESSION['search_username'];    
     if ($total_tweet_count == 0) {
-        echo "<p>No tweet has been posted</p>";
+        echo "<h2>No tweet has been posted</h2>";
     } else if ($total_tweet_count == 1) {
-        echo "<p>Listing the only posted tweet</p>";
+        echo "<h2>Listing the only posted tweet</p></h2>";
     } else {
         if ($current_tweet_count == 1) {
-            echo "<p>Listing tweet $first_tweet_count of all $total_tweet_count tweets</p>";
+            echo "<h2>Listing tweet $first_tweet_count of all $total_tweet_count tweets</h2>";
         } else {
-            echo "<p>Listing tweet $first_tweet_count - $last_tweet_count of all $total_tweet_count tweets</p>";
+            echo "<h2>Listing tweet $first_tweet_count - $last_tweet_count of all $total_tweet_count tweets</h2>";
         }
     }
     
-    ?>
-    <br />
-    <form method="post" action="main.php" name="showtweets">
-        <input type="submit" name="showtweets" value="Newer">
-        <input type="submit" name="showtweets" value="Older">
-    </form>
     
-    <?php
     // display tweets
     
     while($row = mysql_fetch_array($tweets)){
@@ -129,12 +122,20 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
         <fieldset>
             <label><?php echo $row['tweet_date']; ?></label>&nbsp;<a href="delete.php?tweet_id=<?php echo $tweet_id; ?>">Delete</a>
             <br />
-            Tweet: <?php echo $row['tweet_text']; ?>
+            <textarea disabled rows=2 cols=80><?php echo $row['tweet_text']; ?></textarea>
             <br /><br />
         </fieldset>
         </form>    
-    <?php    
+        <?php
     }
+    
+    ?>    
+    <form method="post" action="main.php" name="showtweets">
+        <input type="submit" name="showtweets" value="Newer">
+        <input type="submit" name="showtweets" value="Older">
+    </form>    
+    <?php
+    
 } else {
     ?>
 

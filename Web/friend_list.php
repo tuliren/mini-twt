@@ -45,11 +45,11 @@ if (!empty($_SESSION['loggedin'])) {
     }
     
     if ($friend_count == 0) {
-        echo "<p>You have not added any friend</p>";
+        echo "<h2>You have not added any friend</h2>";
     } else if ($friend_count == 1) {
-        echo "<p>You have one friend</p>";
+        echo "<h2>You have one friend</h2>";
     } else {
-        echo "<p>You have $friend_count friends</p>";
+        echo "<h2>You have $friend_count friends</h2>";
     }
     echo "<br />";
     
@@ -76,7 +76,7 @@ if (!empty($_SESSION['loggedin'])) {
         ?>
         <a href="friend_delete.php?user_id=<?php echo $user_id; ?>&friend_id=all">Remove all</a>
         <br />
-        <br />
+        
         <?php
     }
     

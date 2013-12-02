@@ -46,6 +46,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
         echo "<h1>Mini-Twitter Four</h1>";
         echo "<br />";
         echo "<p>You have successfully logged in, and will be redirected to the member area.</p>";
+        echo "<br />";
         echo "<meta http-equiv='refresh' content='2;main.php' />";
     } else {
         echo "<h1>Mini-Twitter Four</h1>";
@@ -68,7 +69,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
         <br />
         <input type="submit" name="login" id="login" value="Login" />  
     </fieldset>
-    </form>
+    </form>    
     
     <?php
 }
