@@ -134,7 +134,7 @@ if (!empty($_SESSION['loggedin'])) {
         
         ?>
         <a href="friend_add.php?user_id=<?php echo $user_id; ?>&friend_id=<?php echo $friend_id; ?>">Add to Friend</a>
-        <b><?php echo $first_name; ?> <?php echo $last_name; ?></b> (<?php echo $username; ?>) joined since <?php echo $created_date; ?>
+        <b><?php echo $first_name; ?> <?php echo $last_name; ?></b> (@<?php echo $username; ?>) joined since <?php echo $created_date; ?>
         <br /><br />
         <?php
     }

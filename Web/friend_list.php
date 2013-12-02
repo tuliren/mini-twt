@@ -14,10 +14,11 @@
 
 <?php
 
-$_SESSION['search_username'] = "";
+
 
 if (!empty($_SESSION['loggedin'])) {
     
+    $_SESSION['search_username'] = "";
     $user_id = (int) $_SESSION['user_id'];
     
     ?>
@@ -55,15 +56,17 @@ if (!empty($_SESSION['loggedin'])) {
     // list all friends
     foreach ($friend_list as $friend_id_string) {
         $friend_id = (int) $friend_id_string;
-        $friend_query = mysql_query("SELECT user_id, username, first_name, last_name, gender FROM Users WHERE user_id= ".$friend_id."");
+        $friend_query = mysql_query("SELECT user_id, username, first_name, last_name, gender, email FROM Users WHERE user_id= ".$friend_id."");
         if ($row = mysql_fetch_assoc($friend_query)) {
             $friend_id = $row['user_id'];
             $friend_name = $row['username'];
             $friend_first_name = $row['first_name'];
             $friend_last_name = $row['last_name'];
+            $friend_email = $row['email'];
             ?>
             <a href="friend_delete.php?user_id=<?php echo $user_id; ?>&friend_id=<?php echo $friend_id; ?>">Remove</a>
-            <b><?php echo $friend_first_name; ?> <?php echo $friend_last_name; ?></b> (<?php echo $friend_name; ?></b>)
+            <b><?php echo $friend_first_name; ?> <?php echo $friend_last_name; ?></b> (@<?php echo $friend_name; ?></b>)
+            <?php echo $friend_email; ?>
             <br /><br />
             <?php
         }
