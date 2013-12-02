@@ -23,7 +23,7 @@ if (!empty($_SESSION['loggedin'])) {
     
     ?>
     <h1>Mini-Twitter Four</h1>
-    <p><a href="Main.php">My Tweets</a>&nbsp;
+    <p><a href="main.php">My Tweets</a>&nbsp;
        <a href="profile.php">My Profile</a>&nbsp;
        <i>My Friends</i>&nbsp;
        <a href="friend_tweets.php">Friend Tweets</a>&nbsp;
@@ -72,13 +72,21 @@ if (!empty($_SESSION['loggedin'])) {
         }
     }
     
+    if ($friend_count > 0) {
+        ?>
+        <a href="friend_delete.php?user_id=<?php echo $user_id; ?>&friend_id=all">Remove all</a>
+        <br />
+        <br />
+        <?php
+    }
+    
 } else {
     ?>
 
     <h1>Mini-Twitter Four</h1>
     <br />
     <p>You have not logged in yet. Please go to <a href="index.php">login</a>, or <a href="register.php">register</a> a new account.</p>
-    <br>
+    <br />
     
     <?php
 }

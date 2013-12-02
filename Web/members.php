@@ -53,7 +53,7 @@ if (!empty($_SESSION['loggedin'])) {
     }
     ?>    
     <h1>Mini-Twitter Four</h1>
-    <p><a href="Main.php">My Tweets</a>&nbsp;
+    <p><a href="main.php">My Tweets</a>&nbsp;
        <a href="profile.php">My Profile</a>&nbsp;
        <a href="friend_list.php">My Friends</a>&nbsp;
        <a href="friend_tweets.php">Friend Tweets</a>&nbsp;

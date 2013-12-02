@@ -30,7 +30,7 @@ if (!empty($_SESSION['loggedin'])) {
        <a href="members.php">All Users</a>&nbsp;
        <a href="logout.php">Logout</a>
     </p>
-    <br /><br />    
+    <br />
     <?php
     
     // get friend list
@@ -43,8 +43,15 @@ if (!empty($_SESSION['loggedin'])) {
     $friend_count = 0;
     foreach($friend_list as $friend_id_string) {
         if (!empty($friend_id_string)) ++$friend_count;
-    }    
+    }
 
+    if ($friend_count == 0) {
+        ?>
+        <p>You do not have any friend.</p><br />
+        <?php
+        return;
+    }
+    
     // list all friends
     $friend_tweet_query_string = "";
     foreach ($friend_list as $friend_id_string) {
@@ -61,29 +68,17 @@ if (!empty($_SESSION['loggedin'])) {
     }
     $friend_tweet_query_string = $friend_tweet_query_string . "\nORDER BY tweet_date DESC";
     
-    //var_dump($friend_tweet_query_string);
-        /*
-        $friend_tweet = mysql_query("SELECT user_id, username, first_name, last_name, gender FROM Users WHERE user_id= ".$friend_id."");
-        if ($row = mysql_fetch_assoc($friend_query)) {
-            $friend_id = $row['user_id'];
-            $friend_name = $row['username'];
-            $friend_first_name = $row['first_name'];
-            $friend_last_name = $row['last_name'];
-            ?>
-            <a href="friend_delete.php?user_id=<?php echo $user_id; ?>&friend_id=<?php echo $friend_id; ?>">Remove</a>
-            <b><?php echo $friend_first_name; ?> <?php echo $friend_last_name; ?></b> (<?php echo $friend_name; ?></b>)
-            <br /><br />
-            <?php
-        }
-        */
-    
-    
     $friend_tweets = mysql_query($friend_tweet_query_string);
     
-    // display tweets    
-    while($row = mysql_fetch_array($friend_tweets)){        
+    //var_dump($friend_list);
+    //var_dump($friend_tweet_query_string);
+    //var_dump($friend_tweets);
+    
+    // display tweets
+    while($row = mysql_fetch_array($friend_tweets)){
         ?>
-        <p><b><?php echo $row['first_name']; ?> <?php echo $row['last_name']; ?></b> (@<?php echo $row['username']; ?>) <?php echo $row['tweet_date']; ?></p>
+        <p><b><?php echo $row['first_name']; ?> <?php echo $row['last_name']; ?></b> (@<?php echo $row['username']; ?>)</p>
+        <p><?php echo $row['tweet_date']; ?></p>
         <p>Tweet: <?php echo $row['tweet_text']; ?></p>
         <br />          
         <?php    
@@ -95,7 +90,7 @@ if (!empty($_SESSION['loggedin'])) {
     <h1>Mini-Twitter Four</h1>
     <br />
     <p>You have not logged in yet. Please go to <a href="index.php">login</a>, or <a href="register.php">register</a> a new account.</p>
-    <br>    
+    <br />
     <?php
     
 }

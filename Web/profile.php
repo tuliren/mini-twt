@@ -124,6 +124,7 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
         
     </fieldset>
     </form>
+    <br />
 
     <?php
 } else {

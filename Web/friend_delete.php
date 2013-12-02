@@ -16,17 +16,21 @@
     
     $user_id = (int) $_GET['user_id'];
     $friend_id = (int) $_GET['friend_id'];
-    $user_to_add = mysql_query("SELECT username, friends FROM Users WHERE user_id= ".$user_id."");
-    if ($row = mysql_fetch_assoc($user_to_add)) {
-        $friends = $row['friends'];
-        $friend_list = explode(";", $friends);
-    }
+    
     $new_friends = "";
+    
+    if ($friend_id != "all") {
+        $user_to_add = mysql_query("SELECT username, friends FROM Users WHERE user_id= ".$user_id."");
+        if ($row = mysql_fetch_assoc($user_to_add)) {
+            $friends = $row['friends'];
+            $friend_list = explode(";", $friends);
+        }        
 
-    foreach ($friend_list as $friend) {
-        if ((int) $friend != $friend_id) {
-            if (empty($new_friends)) $new_friends = $new_friends . $friend;
-            else $new_friends = $new_friends . ";" . $friend;
+        foreach ($friend_list as $friend) {
+            if ((int) $friend != $friend_id) {
+                if (empty($new_friends)) $new_friends = $new_friends . $friend;
+                else $new_friends = $new_friends . ";" . $friend;
+            }
         }
     }
 
@@ -36,13 +40,15 @@
         ?>
         <h1>Mini-Twitter Four</h1>
         <br />
-        <p>You have removed a friend. <a href="friend_list.php">Go back</a>.</p>
+        <p>You have removed <?php echo ($friend_id == "all" ? "all friends" : "a friend") ?> <a href="friend_list.php">Go back</a>.</p>
+        <br />
         <?php
     } else {
         ?>
         <h1>Mini-Twitter Four</h1>
         <br />
         <p>Removing friend failed. Please <a href="friend_list.php">go back</a> and try again.</p>
+        <br />
         <?php
     }
 ?>
