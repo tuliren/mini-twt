@@ -113,8 +113,7 @@ if (!empty($_SESSION['loggedin']) && !empty($_POST['tweet'])) {
         ?>
         <form method="post" action="main.php" name="tweet" id="tweet">
         <fieldset>
-            <label><?php echo $row['tweet_date']; ?></label>&nbsp;<a href="delete.php?tweet_id=<?php echo $tweet_id; ?>">Delete</a>
-            <br />
+            <p><?php echo $row['tweet_date']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="delete.php?tweet_id=<?php echo $tweet_id; ?>">Delete</a></p>            
             <textarea disabled rows=2 cols=80><?php echo $row['tweet_text']; ?></textarea>
             <br /><br />
         </fieldset>

@@ -15,9 +15,11 @@
 <?php
 
 if (!empty($_SESSION['loggedin'])) {
-    if (!empty($_POST['username_string'])) {
+    if (!empty($_POST['username_string'])) {        
         $_SESSION['search_username'] = $_POST['username_string'];
         $_SESSION['username_offset'] = 0;
+    } else {
+        $_POST['username_string'] = "";
     }
     if (!empty($_POST['list_all'])) {
         $_SESSION['search_username'] = "";
@@ -51,7 +53,7 @@ if (!empty($_SESSION['loggedin'])) {
     <br />
     <?php
     $all_users = mysql_query("SELECT user_id, username, first_name, last_name, created_date FROM Users
-                             WHERE username LIKE '%".$_SESSION['search_username']."%'");
+                              WHERE username LIKE '%".mysql_real_escape_string($_SESSION['search_username'])."%'");
     $total_user_count = mysql_num_rows($all_users);
     
     // display prev or next users
@@ -71,7 +73,7 @@ if (!empty($_SESSION['loggedin'])) {
     }
     
     $curr_users = mysql_query("SELECT user_id, username, first_name, last_name, created_date FROM Users
-                               WHERE username LIKE '%".$_SESSION['search_username']."%'
+                               WHERE username LIKE '%".mysql_real_escape_string($_SESSION['search_username'])."%'
                                ORDER BY username ASC
                                LIMIT ".$user_limit."
                                OFFSET ".$_SESSION['username_offset']."");
@@ -84,7 +86,8 @@ if (!empty($_SESSION['loggedin'])) {
     
     if (empty($_SESSION['search_username'])) {
         if ($total_user_count == 0) {
-            echo "<h2>No registered user, you must be a ghost</h2>";
+            echo "<h2>No user has the username with matching search string</h2>";
+            return;
         } else if ($total_user_count == 1) {
             echo "<h2>You are the only registered user</h2>";
         } else {
@@ -96,7 +99,8 @@ if (!empty($_SESSION['loggedin'])) {
         }
     } else {
         if ($total_user_count == 0) {
-            echo "<h2>No registered user, you must be a ghost</h2>";
+            echo "<h2>No user has the username with matching search string</h2>";
+            return;
         } else if ($total_user_count == 1) {
             echo "<h2>You are the only registered user</h2>";
         } else {

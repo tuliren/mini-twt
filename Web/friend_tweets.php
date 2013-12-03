@@ -115,8 +115,8 @@ if (!empty($_SESSION['loggedin'])) {
         <p><b><?php echo $row['first_name']; ?> <?php echo $row['last_name']; ?></b> (@<?php echo $row['username']; ?>)</p>
         <p><?php echo $row['tweet_date']; ?></p>
         <textarea disabled rows=2 cols=80><?php echo $row['tweet_text']; ?></textarea>
-        <br /><br />     
-        <?php    
+        <br /><br />
+        <?php
     }
     
     ?>  

@@ -104,21 +104,21 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
     <br />
     <form method="post" action="profile.php" name="modifyform" id="modifyform">  
     <fieldset>
-        <label for="password">Password</label><label for="password">******</label>
-        <input type="password" name="password" id="password" maxlength=<?php echo $maxlength_password; ?> placeholder="new password"/><br />
+        <label for="password" style="width:100px">Password</label><label for="password" style="width:180px">******</label>
+        <input type="password" name="password" id="password" maxlength=<?php echo $maxlength_password; ?> pattern="[a-zA-Z0-9]{6,15}" placeholder="new password" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(6 - 15 alphanumeric characters)<br />
     
-        <label for="first_name">First name</label><label for="first_name"><?php echo $_SESSION['first_name']; ?></label>
-        <input type="text" name="first_name" id="first_name" maxlength=<?php echo $maxlength_first_name; ?> placeholder="new first name"/><br />
+        <label for="first_name" style="width:100px">First name</label><label for="first_name" style="width:180px"><?php echo $_SESSION['first_name']; ?></label>
+        <input type="text" name="first_name" id="first_name" maxlength=<?php echo $maxlength_first_name; ?> pattern="[a-zA-Z0-9]{1,10}" placeholder="new first name"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1 - 10 alphanumeric characters)<br />
         
-        <label for="last_name">Last name</label><label for="last_name"><?php echo $_SESSION['last_name']; ?></label>
-        <input type="text" name="last_name" id="last_name" maxlength=<?php echo $maxlength_last_name; ?> placeholder="new last name"/><br />
+        <label for="last_name" style="width:100px">Last name</label><label for="last_name" style="width:180px"><?php echo $_SESSION['last_name']; ?></label>
+        <input type="text" name="last_name" id="last_name" maxlength=<?php echo $maxlength_last_name; ?> pattern="[a-zA-Z0-9]{1,10}" placeholder="new last name"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1 - 10 alphanumeric characters)<br />
 
-        <label for="email">Email</label><label for="email"><?php echo $_SESSION['email']; ?></label>
-        <input type="email" name="email" id="email" maxlength=<?php echo $maxlength_email; ?> placeholder="new email"/><br />        
+        <label for="email" style="width:100px">Email</label><label for="email" style="width:180px"><?php echo $_SESSION['email']; ?></label>
+        <input type="email" name="email" id="email" maxlength=<?php echo $maxlength_email; ?> placeholder="new email"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(email string)<br />
         
-        <label for="gender">Gender</label><label for="gender"><?php echo $_SESSION['gender']; ?></label>
+        <label for="gender" style="width:100px">Gender</label><label for="gender" style="width:180px"><?php echo $_SESSION['gender']; ?></label>
         <input type="radio" name="gender" id="g1" value="male">&nbsp;Male&nbsp;&nbsp;
-        <input type="radio" name="gender" id="g2" value="female">&nbsp;Female
+        <input type="radio" name="gender" id="g2" value="female">&nbsp;Female&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(select one)
         
         <br /><br />
         <input type="submit" name="modify" id="modify" value="Modify" />
