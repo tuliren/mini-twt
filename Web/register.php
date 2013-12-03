@@ -27,6 +27,7 @@ if (!empty($_POST['username']) &&
     $first_name = mysql_real_escape_string($_POST['first_name']);
     $last_name = mysql_real_escape_string($_POST['last_name']);
     $gender = mysql_real_escape_string($_POST['gender']);
+    $friends = "";
     
     $checkusername = mysql_query("SELECT * FROM Users WHERE username = '".$username."'");
     $checkemail = mysql_query("SELECT * FROM Users WHERE email = '".$email."'");
@@ -42,7 +43,8 @@ if (!empty($_POST['username']) &&
         echo "<p>Registration failed. This email has been taken. Please <a href=\"register.php\">try again</a>.</p>";
         echo "<br / >";
     } else {
-        $registerquery = mysql_query("INSERT INTO Users (username, password, first_name, last_name, gender, email) VALUES('".$username."', '".$password."', '".$first_name."', '".$last_name."','".$gender."', '".$email."')");  
+        $registerquery = mysql_query("INSERT INTO Users (username, password, first_name, last_name, gender, email, friends)
+                                                  VALUES('".$username."', '".$password."', '".$first_name."', '".$last_name."','".$gender."', '".$email."', '".$friends."')");
         if ($registerquery) {
             echo "<h1>Mini-Twitter Four</h1>";
             echo "<br />";

@@ -42,6 +42,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
         $_SESSION['user_tweet_offset'] = 0;
         $_SESSION['username_offset'] = 0;
         $_SESSION['search_username'] = "";
+        $_SESSION['friend_tweet_offset'] = 0;
         
         echo "<h1>Mini-Twitter Four</h1>";
         echo "<br />";

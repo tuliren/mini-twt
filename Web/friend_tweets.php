@@ -23,6 +23,7 @@ if (!empty($_SESSION['loggedin'])) {
     
     ?>
     <h1>Mini-Twitter Four</h1>
+    <br />
     <p><a href="main.php">My Tweets</a>&nbsp;
        <a href="profile.php">My Profile</a>&nbsp;
        <a href="friend_list.php">My Friends</a>&nbsp;
@@ -47,7 +48,7 @@ if (!empty($_SESSION['loggedin'])) {
 
     if ($friend_count == 0) {
         ?>
-        <p>You do not have any friend.</p><br />
+        <h2>You have not added any friend</h2><br />
         <?php
         return;
     }
@@ -66,13 +67,47 @@ if (!empty($_SESSION['loggedin'])) {
           ON Users.user_id = Tweets.Users_user_id
           WHERE Users_user_id=".$friend_id.")";
     }
+    
+    // get all friend tweets
     $friend_tweet_query_string = $friend_tweet_query_string . "\nORDER BY tweet_date DESC";
+    $all_friend_tweets = mysql_query($friend_tweet_query_string);
+    $total_friend_tweet = mysql_num_rows($all_friend_tweets);
     
-    $friend_tweets = mysql_query($friend_tweet_query_string);
+    // display prev or next tweets
+    if (!empty($_POST['show_friend_tweets'])) {
+        switch ($_POST['show_friend_tweets']) {
+            case 'Newer':
+                $_SESSION['friend_tweet_offset'] = max(0, $_SESSION['friend_tweet_offset']-$friend_tweet_limit);
+            break;
+            case 'Older':
+                if ($_SESSION['friend_tweet_offset'] + $friend_tweet_limit < $total_friend_tweet) {
+                    $_SESSION['friend_tweet_offset'] = $_SESSION['friend_tweet_offset'] + $friend_tweet_limit;
+                }
+            break;
+            default:
+            break;
+        }
+    }
     
-    //var_dump($friend_list);
-    //var_dump($friend_tweet_query_string);
-    //var_dump($friend_tweets);
+    // get current friend tweets
+    $friend_tweet_limited_str = $friend_tweet_query_string." LIMIT ".$friend_tweet_limit." OFFSET ".$_SESSION['friend_tweet_offset'];
+    $friend_tweets = mysql_query($friend_tweet_limited_str);
+    $curr_friend_tweet = mysql_num_rows($friend_tweets);
+    
+    $first_friend_tweet = $_SESSION['friend_tweet_offset'] + 1;
+    $last_friend_tweet = min($_SESSION['friend_tweet_offset']+$curr_friend_tweet, $total_friend_tweet);
+    
+    if ($total_friend_tweet == 0) {
+        echo "<h2>None of your friend has posted any tweet</h2>";
+    } else if ($total_friend_tweet == 1) {
+        echo "<h2>There is one tweet from your friend(s)</p></h2>";
+    } else {
+        if ($curr_friend_tweet == 1) {
+            echo "<h2>Listing tweet $first_friend_tweet of all $total_friend_tweet tweets from your friend(s)</h2>";
+        } else {
+            echo "<h2>Listing tweet $first_friend_tweet - $last_friend_tweet of all $total_friend_tweet tweets from your friend(s)</h2>";
+        }
+    }
     
     // display tweets
     while($row = mysql_fetch_array($friend_tweets)){
@@ -83,6 +118,14 @@ if (!empty($_SESSION['loggedin'])) {
         <br /><br />     
         <?php    
     }
+    
+    ?>  
+    <form method="post" action="friend_tweets.php" name="show_friend_tweets">
+        <input type="submit" name="show_friend_tweets" value="Newer">
+        <input type="submit" name="show_friend_tweets" value="Older">
+    </form>
+    
+    <?php
     
 } else {
 

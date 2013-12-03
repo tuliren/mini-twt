@@ -23,6 +23,7 @@ if (!empty($_SESSION['loggedin'])) {
     
     ?>
     <h1>Mini-Twitter Four</h1>
+    <br />
     <p><a href="main.php">My Tweets</a>&nbsp;
        <a href="profile.php">My Profile</a>&nbsp;
        <i>My Friends</i>&nbsp;
@@ -65,7 +66,7 @@ if (!empty($_SESSION['loggedin'])) {
             $friend_email = $row['email'];
             ?>
             <a href="friend_delete.php?user_id=<?php echo $user_id; ?>&friend_id=<?php echo $friend_id; ?>">Remove</a>
-            <b><?php echo $friend_first_name; ?> <?php echo $friend_last_name; ?></b> (@<?php echo $friend_name; ?></b>)
+            <b><?php echo $friend_first_name; ?> <?php echo $friend_last_name; ?></b> (@<?php echo $friend_name; ?>)
             <?php echo $friend_email; ?>
             <br /><br />
             <?php

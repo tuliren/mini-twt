@@ -28,6 +28,7 @@
     
     $tweet_limit = 5;
     $user_limit = 10;
+    $friend_tweet_limit = 5;
     
     $friend_limit = 20;
     

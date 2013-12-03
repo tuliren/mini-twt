@@ -28,7 +28,7 @@ ENGINE = InnoDB;
 -- Table `Twitter_Group_Four`.`Tweets`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Twitter_Group_Four`.`Tweets` (
-  `tweet_id` INT NULL,
+  `tweet_id` INT NOT NULL AUTO_INCREMENT,
   `tweet_text` VARCHAR(140) NOT NULL DEFAULT '(Blank)',
   `tweet_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `Users_user_id` INT NOT NULL,

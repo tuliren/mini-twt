@@ -25,34 +25,10 @@ if (!empty($_SESSION['loggedin'])) {
     }
     
     $user_id = (int) $_SESSION['user_id'];
-    
-    // display prev or next users
-    if (!empty($_POST['showusers'])) {
-        switch ($_POST['showusers']) {
-            case 'Prev':
-                if ($_SESSION['username_offset'] - $user_limit >= 0) {
-                    $_SESSION['username_offset'] = $_SESSION['username_offset'] - $user_limit;
-                } else {
-                    $_SESSION['username_offset'] = 0;
-                }
-            break;
-            case 'Next':
-                $new_user_offset = $_SESSION['username_offset'] + $user_limit;
-                $usercount = mysql_query("SELECT user_id, username, first_name, last_name, gender FROM Users  
-                                          WHERE username LIKE '%".$_SESSION['search_username']."%'                
-                                          ORDER BY username ASC
-                                          LIMIT ".$user_limit."
-                                          OFFSET ".$new_user_offset."");
-                if (mysql_num_rows($usercount) > 0) {
-                    $_SESSION['username_offset'] = $new_user_offset;
-                }
-            break;
-            default:
-            break;
-        }
-    }
+        
     ?>    
     <h1>Mini-Twitter Four</h1>
+    <br />
     <p><a href="main.php">My Tweets</a>&nbsp;
        <a href="profile.php">My Profile</a>&nbsp;
        <a href="friend_list.php">My Friends</a>&nbsp;
@@ -74,20 +50,38 @@ if (!empty($_SESSION['loggedin'])) {
     </form>
     <br />
     <?php
-    $totalusers = mysql_query("SELECT user_id, username, first_name, last_name, created_date FROM Users
+    $all_users = mysql_query("SELECT user_id, username, first_name, last_name, created_date FROM Users
                              WHERE username LIKE '%".$_SESSION['search_username']."%'");
+    $total_user_count = mysql_num_rows($all_users);
     
-    $allusers = mysql_query("SELECT user_id, username, first_name, last_name, created_date FROM Users
-                             WHERE username LIKE '%".$_SESSION['search_username']."%'
-                             ORDER BY username ASC
-                             LIMIT ".$user_limit."
-                             OFFSET ".$_SESSION['username_offset']."");
-                             
-    $total_user_count = mysql_num_rows($totalusers);
-    $current_user_count = mysql_num_rows($allusers);
+    // display prev or next users
+    if (!empty($_POST['showusers'])) {
+        switch ($_POST['showusers']) {
+            case 'Prev':
+                $_SESSION['username_offset'] = max(0, $_SESSION['username_offset']-$user_limit);
+            break;
+            case 'Next':
+                if ($_SESSION['username_offset'] + $user_limit < $total_user_count) {
+                    $_SESSION['username_offset'] = $_SESSION['username_offset'] + $user_limit;
+                }
+            break;
+            default:
+            break;
+        }
+    }
+    
+    $curr_users = mysql_query("SELECT user_id, username, first_name, last_name, created_date FROM Users
+                               WHERE username LIKE '%".$_SESSION['search_username']."%'
+                               ORDER BY username ASC
+                               LIMIT ".$user_limit."
+                               OFFSET ".$_SESSION['username_offset']."");
+    $current_user_count = mysql_num_rows($curr_users);    
+    
     $first_count = $_SESSION['username_offset'] + 1;
-    $last_count = $_SESSION['username_offset'] + $current_user_count;
+    $last_count = min($total_user_count, $_SESSION['username_offset']+$current_user_count);
+    
     $search_string = $_SESSION['search_username'];
+    
     if (empty($_SESSION['search_username'])) {
         if ($total_user_count == 0) {
             echo "<h2>No registered user, you must be a ghost</h2>";
@@ -112,11 +106,10 @@ if (!empty($_SESSION['loggedin'])) {
                 echo "<h2>Listing user $first_count - $last_count of the $total_user_count users whose username contains \"$search_string\"</h2>";
             }
         }
-    }
-    
+    }    
     
     // list all users    
-    while($row = mysql_fetch_array($allusers)){
+    while($row = mysql_fetch_array($curr_users)){
         $friend_id = $row['user_id'];
         $username = $row['username'];
         $first_name = $row['first_name'];

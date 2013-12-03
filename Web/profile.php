@@ -91,7 +91,8 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
     
 } else if (!empty($_SESSION['loggedin']) && !empty($_SESSION['username'])) {
     ?>
-    <h1>Mini-Twitter Four</h1>    
+    <h1>Mini-Twitter Four</h1>
+    <br />    
     <p><a href="main.php">My Tweets</a>&nbsp;
        <i>My Profile</i>&nbsp;
        <a href="friend_list.php">My Friends</a>&nbsp;
@@ -99,23 +100,23 @@ if (!empty($_POST['password']) || !empty($_POST['first_name']) || !empty($_POST[
        <a href="members.php">All Users</a>&nbsp;
        <a href="logout.php">Logout</a></p>    
     <br />
-    <h2>Personal profile for <?php echo $_SESSION['username']; ?> (joined since <?php echo $_SESSION['created_date']; ?>)</h2>
+    <h2>Personal profile for @<?php echo $_SESSION['username']; ?> (joined since <?php echo $_SESSION['created_date']; ?>)</h2>
     <br />
     <form method="post" action="profile.php" name="modifyform" id="modifyform">  
     <fieldset>
-        <label for="password">Password</label><label>******</label>
+        <label for="password">Password</label><label for="password">******</label>
         <input type="password" name="password" id="password" maxlength=<?php echo $maxlength_password; ?> placeholder="new password"/><br />
     
-        <label for="first_name">First name</label><label><?php echo $_SESSION['first_name']; ?></label>
+        <label for="first_name">First name</label><label for="first_name"><?php echo $_SESSION['first_name']; ?></label>
         <input type="text" name="first_name" id="first_name" maxlength=<?php echo $maxlength_first_name; ?> placeholder="new first name"/><br />
         
-        <label for="last_name">Last name</label><label><?php echo $_SESSION['last_name']; ?></label>
+        <label for="last_name">Last name</label><label for="last_name"><?php echo $_SESSION['last_name']; ?></label>
         <input type="text" name="last_name" id="last_name" maxlength=<?php echo $maxlength_last_name; ?> placeholder="new last name"/><br />
 
-        <label for="email">Email</label><label><?php echo $_SESSION['email']; ?></label>
+        <label for="email">Email</label><label for="email"><?php echo $_SESSION['email']; ?></label>
         <input type="email" name="email" id="email" maxlength=<?php echo $maxlength_email; ?> placeholder="new email"/><br />        
         
-        <label for="gender">Gender</label><label><?php echo $_SESSION['gender']; ?></label>
+        <label for="gender">Gender</label><label for="gender"><?php echo $_SESSION['gender']; ?></label>
         <input type="radio" name="gender" id="g1" value="male">&nbsp;Male&nbsp;&nbsp;
         <input type="radio" name="gender" id="g2" value="female">&nbsp;Female
         
