@@ -15,12 +15,12 @@ body {
 
 a {
     font-family: Trebuchet MS;    
-    color: #336699;
+    color: #336699;    
 }
 
 a:hover,
 a:active {
-    outline: 0;
+    outline: 0;    
     color: #336699;
 }
 
@@ -46,8 +46,8 @@ form fieldset { border: 0; }
 label {
     display: block;
     margin-top: 0px;
-    width: 200px;
-    padding: 4;
+    width: 150px;
+    padding: 5px;
     float: left;
 }  
 input {  
