@@ -86,7 +86,7 @@ if (!empty($_SESSION['loggedin'])) {
     
     if (empty($_SESSION['search_username'])) {
         if ($total_user_count == 0) {
-            echo "<h2>No user has the username with matching search string</h2>";
+            echo "<h2>No user has the username matching search string</h2>";
             return;
         } else if ($total_user_count == 1) {
             echo "<h2>You are the only registered user</h2>";
@@ -99,10 +99,10 @@ if (!empty($_SESSION['loggedin'])) {
         }
     } else {
         if ($total_user_count == 0) {
-            echo "<h2>No user has the username with matching search string</h2>";
+            echo "<h2>No user has the username matching search string</h2>";
             return;
         } else if ($total_user_count == 1) {
-            echo "<h2>You are the only registered user</h2>";
+            echo "<h2>One user has the username matching search string</h2>";
         } else {
             if ($current_user_count == 1) {
                 echo "<h2>Listing user $first_count of all $total_user_count users</h2>";
