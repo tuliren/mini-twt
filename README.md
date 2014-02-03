@@ -5,6 +5,8 @@ CSCI 50600 course project, group #4
 ## Website
 http://ec2-54-200-186-219.us-west-2.compute.amazonaws.com
 
+The website has been shut down currently to save money...
+
 ## Front / back end
 
 Apache, MySQL, PHP, Java
